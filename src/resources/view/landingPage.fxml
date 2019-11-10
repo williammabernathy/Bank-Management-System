@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="787.0" prefWidth="1460.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.landingPageController">
+   <children>
+      <VBox layoutX="14.0" layoutY="14.0" prefHeight="787.0" prefWidth="381.0" style="-fx-background-color: #96d1c7;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Pane prefHeight="46.0" prefWidth="313.0" style="-fx-background-color: #beebe9; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);">
+               <children>
+                  <Text layoutX="68.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bank Name goes here" wrappingWidth="224.205078125" />
+               </children>
+               <VBox.margin>
+                  <Insets left="20.0" right="20.0" top="20.0" />
+               </VBox.margin>
+            </Pane>
+            <Button fx:id="mainAccountButton" mnemonicParsing="false" prefHeight="39.0" prefWidth="285.0" style="-fx-background-color: #96d1c7;" text="Account" textFill="WHITE">
+               <VBox.margin>
+                  <Insets left="30.0" top="30.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="mainCardServicesButton" mnemonicParsing="false" prefHeight="39.0" prefWidth="285.0" style="-fx-background-color: #96d1c7;" text="Card Services" textFill="WHITE">
+               <VBox.margin>
+                  <Insets left="30.0" top="30.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="LoanServices" mnemonicParsing="false" prefHeight="39.0" prefWidth="285.0" style="-fx-background-color: #96d1c7;" text="Loan Services" textFill="WHITE">
+               <VBox.margin>
+                  <Insets left="30.0" top="30.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="mainMoneyExchangeButton" mnemonicParsing="false" prefHeight="39.0" prefWidth="285.0" style="-fx-background-color: #96d1c7;" text="Money Exchange" textFill="WHITE">
+               <VBox.margin>
+                  <Insets left="30.0" top="30.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="mainCustomerInformationButton" mnemonicParsing="false" prefHeight="39.0" prefWidth="285.0" style="-fx-background-color: #96d1c7;" text="Customer Information" textFill="WHITE">
+               <VBox.margin>
+                  <Insets left="30.0" top="30.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+      </VBox>
+      <TextField fx:id="searchTextField" alignment="CENTER_RIGHT" layoutX="394.0" layoutY="14.0" prefHeight="39.0" prefWidth="742.0" promptText="search" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);" AnchorPane.leftAnchor="394.0" AnchorPane.rightAnchor="324.0" AnchorPane.topAnchor="14.0" />
+      <Button fx:id="loggedUserActorButton" layoutX="1238.0" layoutY="14.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="285.0" style="-fx-background-color: #fffdf9; -fx-background-radius: 50px; -fx-border-radius: 50px;" text="loggedUName" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="14.0" />
+      <Pane layoutX="394.0" layoutY="65.0" prefHeight="722.0" prefWidth="742.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="394.0" AnchorPane.rightAnchor="324.0" AnchorPane.topAnchor="65.0" />
+      <Pane layoutX="1158.0" layoutY="65.0" prefHeight="362.0" prefWidth="285.0" style="-fx-background-color: ecfcff;" AnchorPane.rightAnchor="17.0" AnchorPane.topAnchor="65.0">
+         <children>
+            <Button layoutX="6.0" layoutY="36.0" minHeight="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="274.0" style="-fx-background-color: ecfcff; -fx-border-radius: 20px; -fx-background-radius: 20px; -fx-border-color: gray;" text="Create Account">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Button>
+            <Button layoutX="6.0" layoutY="74.0" minHeight="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="274.0" style="-fx-background-color: ecfcff; -fx-border-radius: 20px; -fx-background-radius: 20px; -fx-border-color: gray;" text="Modify Account">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Button>
+            <Button layoutX="6.0" layoutY="146.0" minHeight="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="274.0" style="-fx-background-color: ecfcff; -fx-border-radius: 20px; -fx-background-radius: 20px; -fx-border-color: gray;" text="Customer Accounts">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Button>
+            <Button layoutX="6.0" layoutY="110.0" minHeight="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="274.0" style="-fx-background-color: ecfcff; -fx-border-radius: 20px; -fx-background-radius: 20px; -fx-border-color: gray;" text="Close Account">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Button>
+            <Button layoutX="6.0" layoutY="182.0" minHeight="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="274.0" style="-fx-background-color: ecfcff; -fx-border-radius: 20px; -fx-background-radius: 20px; -fx-border-color: gray;" text="Transfer Money">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Button>
+            <Button layoutX="6.0" layoutY="258.0" minHeight="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="274.0" style="-fx-background-color: ecfcff; -fx-border-radius: 20px; -fx-background-radius: 20px; -fx-border-color: gray;" text="Withdraw Money">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Button>
+            <Button layoutX="6.0" layoutY="294.0" minHeight="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="274.0" style="-fx-background-color: ecfcff; -fx-border-radius: 20px; -fx-background-radius: 20px; -fx-border-color: gray;" text="Account Information">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Button>
+            <Button layoutX="6.0" layoutY="221.0" minHeight="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="274.0" style="-fx-background-color: ecfcff; -fx-border-radius: 20px; -fx-background-radius: 20px; -fx-border-color: gray;" text="Deposit Money">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+      <Pane layoutX="1159.0" layoutY="632.0" prefHeight="133.0" prefWidth="285.0" style="-fx-background-color: white; -fx-border-color: grey;">
+         <children>
+            <Button fx:id="clearButton" layoutX="6.0" layoutY="11.0" minHeight="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="274.0" style="-fx-background-color: #96d1c7; -fx-border-radius: 5px; -fx-background-radius: 5px;" text="Clear">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Button>
+            <Button fx:id="saveButton" layoutX="6.0" layoutY="50.0" minHeight="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="274.0" style="-fx-background-color: #96d1c7; -fx-border-radius: 5px; -fx-background-radius: 5px;" text="Save">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Button>
+            <Button fx:id="homeButton" layoutX="6.0" layoutY="93.0" minHeight="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="274.0" style="-fx-background-color: #96d1c7; -fx-border-radius: 5px; -fx-background-radius: 5px;" text="Home">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
