@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.loginController">
+   <children>
+      <HBox prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Pane prefHeight="600.0" prefWidth="301.0000999999975" style="-fx-background-color: #96d1c7">
+               <children>
+                  <Separator layoutX="296.0" layoutY="0.0" orientation="VERTICAL" prefHeight="600.0" />
+                  <PasswordField fx:id="passwordTextField" layoutX="51.0" layoutY="270.0" prefWidth="200.0" promptText="password" style="-fx-text-fill: #5eb7b7" text="" />
+                  <TextField id="passwordTextField" fx:id="useranameTextField" layoutX="51.0" layoutY="223.0" prefWidth="200.0" promptText="username" style="-fx-text-fill: #5eb7b7" text="" />
+                  <Button fx:id="loginButton" layoutX="51.0" layoutY="338.0" mnemonicParsing="false" onMouseClicked="#handleLoginButtonAction" prefWidth="200.0" style="-fx-background-color: #5eb7b7" text="Login" />
+                  <Button fx:id="forgotPasswordButton" layoutX="51.0" layoutY="383.0" mnemonicParsing="false" prefWidth="200.0" style="-fx-background-color: #5eb7b7" text="Forgot Password" />
+                  <TextArea layoutX="51.0" layoutY="31.0" prefHeight="163.0" prefWidth="186.0" text="&#10;&#10;logo goes here ..." wrapText="true" />
+               </children>
+            </Pane>
+            <Pane id="" prefHeight="600.0" prefWidth="499.0" style="&#10;">
+               <children>
+                  <TextArea layoutX="142.0" layoutY="148.0" prefHeight="163.0" prefWidth="186.0" text="&#10;&#10;&#10;some kind of banner??" wrapText="true" />
+               </children>
+            </Pane>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

@@ -60,11 +60,8 @@
       <Button fx:id="loggedUserActorButton" layoutX="1238.0" layoutY="14.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="285.0" style="-fx-background-color: #fffdf9; -fx-background-radius: 50px; -fx-border-radius: 50px;" text="loggedUName" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="14.0" />
       <Pane fx:id="interactivePane" layoutX="275.0" layoutY="63.0" prefHeight="710.0" prefWidth="1176.0">
          <children>
-            <Pane fx:id="dialogueAccountPane" layoutX="-48.0" layoutY="-5.0" prefHeight="241.0" prefWidth="323.0">
-               <children>
-                  <Pane fx:id="dialogueMoneyExchangePane" layoutX="-2.0" layoutY="116.0" prefHeight="241.0" prefWidth="323.0" />
-               </children>
-            </Pane>
+            <Pane fx:id="dialogueAccountPane" layoutX="-48.0" layoutY="-5.0" prefHeight="241.0" prefWidth="323.0" />
+            <Pane fx:id="dialogueMoneyExchangePane" layoutX="-58.0" layoutY="-15.0" prefHeight="241.0" prefWidth="323.0" />
          </children>
       </Pane>
    </children>
