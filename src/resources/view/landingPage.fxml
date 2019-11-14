@@ -10,9 +10,26 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="787.0" prefWidth="1460.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.LandingPageController">
+<AnchorPane minHeight="-Infinity" prefHeight="787.0" prefWidth="1251.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.LandingPageController">
    <children>
-      <VBox layoutX="-6.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="787.0" prefWidth="277.0" style="-fx-background-color: #96d1c7;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-6.0" AnchorPane.topAnchor="0.0">
+      <Pane fx:id="customerListPane" layoutX="281.0" layoutY="54.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="633.0" prefWidth="920.0" style="-fx-background-color: #F8F8F8;" AnchorPane.bottomAnchor="94.0" AnchorPane.leftAnchor="281.0" AnchorPane.topAnchor="60.0">
+         <children>
+            <Label layoutX="18.0" layoutY="8.0" prefHeight="27.0" prefWidth="178.0" text="Customers">
+               <font>
+                  <Font size="27.0" />
+               </font>
+            </Label>
+            <TableView layoutX="24.0" layoutY="68.0" prefHeight="538.0" prefWidth="490.0">
+              <columns>
+                <TableColumn prefWidth="75.0" text="C1" />
+              </columns>
+            </TableView>
+            <Button layoutX="550.0" layoutY="72.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="178.0" text="Modify" />
+            <Button layoutX="550.0" layoutY="116.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="178.0" text="Select" />
+            <Separator layoutX="16.0" layoutY="47.0" prefHeight="2.0" prefWidth="892.0" />
+         </children>
+      </Pane>
+      <VBox layoutX="-6.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="787.0" prefWidth="277.0" style="-fx-background-color: #96d1c7;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Pane prefHeight="46.0" prefWidth="313.0" style="-fx-background-color: #beebe9; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);">
                <children>
@@ -22,15 +39,23 @@
                   <Insets left="20.0" right="20.0" top="20.0" />
                </VBox.margin>
             </Pane>
-            <Button fx:id="mainAccountButton" mnemonicParsing="false" onMouseClicked="#accountButtonClicked" prefHeight="50.0" prefWidth="285.0" style="-fx-background-color: #96d1c7;" text="Account" textFill="WHITE">
+            <Button fx:id="mainHomeButton" mnemonicParsing="false" onMouseClicked="#homeButtonClicked" prefHeight="50.0" prefWidth="285.0" style="-fx-background-color: #96d1c7;" text="Home" textFill="WHITE">
+               <font>
+                  <Font size="25.0" />
+               </font>
                <VBox.margin>
                   <Insets top="10.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="mainAccountButton" mnemonicParsing="false" onMouseClicked="#accountButtonClicked" prefHeight="50.0" prefWidth="285.0" style="-fx-background-color: #96d1c7;" text="Account" textFill="WHITE">
+               <VBox.margin>
+                  <Insets />
                </VBox.margin>
                <font>
                   <Font size="25.0" />
                </font>
             </Button>
-            <Button fx:id="mainCustomersButton" mnemonicParsing="false" onMouseClicked="#customersButtonClicked" prefHeight="50.0" prefWidth="285.0" style="-fx-background-color: #96d1c7;" text="Customers" textFill="WHITE">
+            <Button fx:id="mainCustomersButton" mnemonicParsing="false" onMouseClicked="#customersButtonClicked" prefHeight="50.0" prefWidth="285.0" style="-fx-background-color: #96d1c7;" text="Customer" textFill="WHITE">
                <VBox.margin>
                   <Insets />
                </VBox.margin>
@@ -54,22 +79,42 @@
                   <Font size="25.0" />
                </font>
             </Button>
+            <Label prefHeight="27.0" prefWidth="218.0" text="Display customer selected">
+               <VBox.margin>
+                  <Insets left="30.0" top="350.0" />
+               </VBox.margin>
+            </Label>
          </children>
       </VBox>
-      <TextField fx:id="searchTextField" alignment="CENTER_RIGHT" layoutX="275.0" layoutY="14.0" prefHeight="14.0" prefWidth="861.0" promptText="search" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);" visible="false" AnchorPane.leftAnchor="275.0" AnchorPane.rightAnchor="324.0" AnchorPane.topAnchor="14.0">
+      <Pane fx:id="createAccountPane" layoutX="277.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="645.0" prefWidth="860.0" style="-fx-background-color: #F8F8F8;" visible="false" AnchorPane.bottomAnchor="82.0" AnchorPane.leftAnchor="290.0" AnchorPane.topAnchor="60.0">
+         <children>
+            <VBox>
+               <children>
+                  <Label layoutX="37.0" layoutY="30.0" text="Type" AnchorPane.leftAnchor="37.0" AnchorPane.topAnchor="30.0" />
+                  <ComboBox layoutX="37.0" layoutY="70.0" prefHeight="39.0" prefWidth="844.0" promptText="Select an account type" AnchorPane.leftAnchor="37.0" />
+                  <Label layoutX="37.0" layoutY="113.0" text="Account Name" AnchorPane.leftAnchor="37.0" />
+                  <TextField layoutX="37.0" layoutY="144.0" prefHeight="18.0" prefWidth="844.0" AnchorPane.leftAnchor="37.0" />
+                  <Label layoutX="37.0" layoutY="192.0" text="Account Holder" AnchorPane.leftAnchor="37.0" />
+                  <TextField layoutX="37.0" layoutY="223.0" prefHeight="39.0" prefWidth="844.0" promptText="LastName, Firstname" AnchorPane.leftAnchor="37.0" />
+                  <Label layoutX="37.0" layoutY="276.0" text="Account Number" AnchorPane.leftAnchor="37.0" />
+                  <TextField layoutX="37.0" layoutY="307.0" prefHeight="39.0" prefWidth="844.0" AnchorPane.leftAnchor="37.0" />
+                  <Label layoutX="37.0" layoutY="354.0" text="Swift" AnchorPane.leftAnchor="37.0" />
+                  <TextField layoutX="37.0" layoutY="385.0" prefHeight="39.0" prefWidth="844.0" AnchorPane.leftAnchor="37.0" />
+                  <Label layoutX="37.0" layoutY="438.0" text="Opening Balance" AnchorPane.leftAnchor="37.0" />
+                  <TextField layoutX="37.0" layoutY="465.0" prefHeight="39.0" prefWidth="844.0" promptText="0.00" AnchorPane.leftAnchor="37.0" />
+                  <Button layoutX="280.0" layoutY="511.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="201.0" text="Clear" />
+                  <Button layoutX="39.0" layoutY="521.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="247.0" text="Create New Bank Account" />
+               </children>
+            </VBox>
+            <Label text="Account Information" />
+            <Separator layoutY="2.0" prefHeight="1.0" prefWidth="904.0" />
+         </children>
+      </Pane>
+      <TextField fx:id="searchTextField" alignment="CENTER_RIGHT" layoutX="286.0" layoutY="14.0" prefHeight="30.0" prefWidth="470.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);" AnchorPane.leftAnchor="286.0" AnchorPane.rightAnchor="704.0" AnchorPane.topAnchor="14.0">
          <font>
             <Font size="14.0" />
          </font></TextField>
-      <Button fx:id="loggedUserActorButton" layoutX="1238.0" layoutY="14.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="285.0" style="-fx-background-color: #fffdf9; -fx-background-radius: 50px; -fx-border-radius: 50px;" text="loggedUName" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="14.0" />
-      <AnchorPane layoutX="275.0" layoutY="63.0">
-         <children>
-            <Pane fx:id="interactivePane" prefHeight="710.0" prefWidth="1176.0">
-               <children>
-                  <Pane fx:id="dialogueAccountPane" layoutX="306.0" layoutY="44.0" prefHeight="241.0" prefWidth="323.0" />
-                  <Pane fx:id="dialogueMoneyExchangePane" layoutX="306.0" layoutY="44.0" prefHeight="241.0" prefWidth="323.0" />
-               </children>
-            </Pane>
-         </children>
-      </AnchorPane>
+      <Button fx:id="loggedUserActorButton" layoutX="972.0" layoutY="10.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="141.0" style="-fx-background-color: #fffdf9; -fx-background-radius: 50px; -fx-border-radius: 50px;" text="loggedUName" AnchorPane.rightAnchor="347.0" AnchorPane.topAnchor="10.0" />
+      <Button layoutX="837.0" layoutY="10.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="78.0" text="Search" AnchorPane.rightAnchor="545.0" AnchorPane.topAnchor="10.0" />
    </children>
 </AnchorPane>

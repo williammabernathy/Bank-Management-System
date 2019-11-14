@@ -22,8 +22,8 @@ public class Main extends Application
 
         Parent root = FXMLLoader.load(getClass().getResource("../resources/view/landingPage.fxml"));
         primaryStage.setTitle("Bank Management System");
-        primaryStage.setScene(new Scene(root, 1054, 702));
-        primaryStage.setResizable(false);
+        primaryStage.setScene(new Scene(root, 1251, 787));
+        //primaryStage.setResizable(false);
 //        primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.show();
     }
