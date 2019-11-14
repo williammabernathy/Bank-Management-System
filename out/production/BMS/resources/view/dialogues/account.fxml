@@ -8,9 +8,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox fx:id="accountOptionsVBox" prefHeight="177.0" prefWidth="252.0" style="-fx-background-color: #96d1c7;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:id="accountOptionsVBox" prefHeight="177.0" prefWidth="252.0" style="-fx-background-color: #96d1c7;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.LandingPageController">
    <children>
-      <Button fx:id="accountsButton" minHeight="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="240.0" style="-fx-background-color: grey;" text="Accounts" textAlignment="CENTER" textFill="WHITE">
+      <Button fx:id="accountsButton" minHeight="-Infinity" mnemonicParsing="false" onMouseClicked="#accountsButtonClicked" prefHeight="30.0" prefWidth="240.0" style="-fx-background-color: grey;" text="Accounts" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font>
@@ -18,7 +18,7 @@
             <Insets left="4.0" top="4.0" />
          </VBox.margin>
       </Button>
-      <Button fx:id="createAccountButton" minHeight="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="240.0" style="-fx-background-color: grey;" text="Create Account" textAlignment="CENTER" textFill="WHITE">
+      <Button fx:id="createAccountButton" minHeight="-Infinity" mnemonicParsing="false" onAction="#createAccountButtonClicked" prefHeight="30.0" prefWidth="240.0" style="-fx-background-color: grey;" text="Create Account" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font>
@@ -26,7 +26,7 @@
             <Insets left="4.0" top="4.0" />
          </VBox.margin>
       </Button>
-      <Button fx:id="modifyAccountButton" minHeight="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="240.0" style="-fx-background-color: grey;" text="Modify Account" textAlignment="CENTER" textFill="WHITE">
+      <Button fx:id="modifyAccountButton" minHeight="-Infinity" mnemonicParsing="false" onMouseClicked="#modifyAccountButtonClicked" prefHeight="30.0" prefWidth="240.0" style="-fx-background-color: grey;" text="Modify Account" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font>
@@ -34,7 +34,7 @@
             <Insets left="4.0" top="4.0" />
          </VBox.margin>
       </Button>
-      <Button fx:id="closeAccountButton" minHeight="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="240.0" style="-fx-background-color: grey;" text="Close Account" textAlignment="CENTER" textFill="WHITE">
+      <Button fx:id="closeAccountButton" minHeight="-Infinity" mnemonicParsing="false" onMouseClicked="#closeAccountButtonClicked" prefHeight="30.0" prefWidth="240.0" style="-fx-background-color: grey;" text="Close Account" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font>
@@ -42,7 +42,7 @@
             <Insets left="4.0" top="4.0" />
          </VBox.margin>
       </Button>
-      <Button fx:id="accountInformationButton" minHeight="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="240.0" style="-fx-background-color: grey;" text="Account Information" textAlignment="CENTER" textFill="WHITE">
+      <Button fx:id="accountInformationButton" minHeight="-Infinity" mnemonicParsing="false" onMouseClicked="#accountInformationButtonClicked" prefHeight="30.0" prefWidth="240.0" style="-fx-background-color: grey;" text="Account Information" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font>

@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class loginController {
+public class LoginController {
     public void handleLoginButtonAction(MouseEvent mouseEvent){
         //Authenticate user here
         // and display landing page if true

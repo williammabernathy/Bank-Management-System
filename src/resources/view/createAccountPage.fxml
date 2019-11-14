@@ -8,68 +8,39 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="787.0" prefWidth="1460.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.landingPageController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="710.0" prefWidth="1176.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.LandingPageController">
    <children>
-      <VBox layoutX="14.0" layoutY="14.0" prefHeight="787.0" prefWidth="381.0" style="-fx-background-color: #96d1c7;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane prefHeight="710.0" prefWidth="1176.0">
          <children>
-            <Pane prefHeight="46.0" prefWidth="313.0" style="-fx-background-color: #beebe9; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);">
-               <children>
-                  <Text layoutX="68.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bank Name goes here" wrappingWidth="224.205078125" />
-               </children>
-               <VBox.margin>
-                  <Insets left="20.0" right="20.0" top="20.0" />
-               </VBox.margin>
-            </Pane>
-            <Button fx:id="mainAccountButton" mnemonicParsing="false" prefHeight="39.0" prefWidth="285.0" style="-fx-background-color: #96d1c7;" text="Account" textFill="WHITE">
-               <VBox.margin>
-                  <Insets left="30.0" top="30.0" />
-               </VBox.margin>
-            </Button>
-            <Button fx:id="mainCustomersButton" mnemonicParsing="false" prefHeight="39.0" prefWidth="285.0" style="-fx-background-color: #96d1c7;" text="Customers" textFill="WHITE">
-               <VBox.margin>
-                  <Insets left="30.0" top="30.0" />
-               </VBox.margin>
-            </Button>
-            <Button fx:id="LoanServices" mnemonicParsing="false" prefHeight="39.0" prefWidth="285.0" style="-fx-background-color: #96d1c7;" text="Loan Services" textFill="WHITE">
-               <VBox.margin>
-                  <Insets left="30.0" top="30.0" />
-               </VBox.margin>
-            </Button>
-            <Button fx:id="mainMoneyExchangeButton" mnemonicParsing="false" prefHeight="39.0" prefWidth="285.0" style="-fx-background-color: #96d1c7;" text="Money Exchange" textFill="WHITE">
-               <VBox.margin>
-                  <Insets left="30.0" top="30.0" />
-               </VBox.margin>
-            </Button>
-         </children>
-      </VBox>
-      <TextField fx:id="searchTextField" alignment="CENTER_RIGHT" layoutX="394.0" layoutY="14.0" prefHeight="39.0" prefWidth="742.0" promptText="search" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);" AnchorPane.leftAnchor="394.0" AnchorPane.rightAnchor="324.0" AnchorPane.topAnchor="14.0" />
-      <Button fx:id="loggedUserActorButton" layoutX="1238.0" layoutY="14.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="285.0" style="-fx-background-color: #fffdf9; -fx-background-radius: 50px; -fx-border-radius: 50px;" text="loggedUName" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="14.0" />
-      <Pane layoutX="394.0" layoutY="65.0" prefHeight="722.0" prefWidth="742.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="394.0" AnchorPane.rightAnchor="324.0" AnchorPane.topAnchor="65.0">
-         <children>
-            <TabPane prefHeight="702.0" prefWidth="1052.0" tabClosingPolicy="UNAVAILABLE">
-              <tabs>
-                <Tab text="General Info">
+            <Label text="Account Information" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0" />
+            <Separator prefHeight="0.0" prefWidth="1151.0" AnchorPane.topAnchor="40.0" />
+            <TabPane layoutX="14.0" layoutY="57.0" prefHeight="631.0" prefWidth="867.0" tabClosingPolicy="UNAVAILABLE">
+               <tabs>
+                  <Tab text="Account Information">
                      <content>
-                        <VBox prefHeight="657.0" prefWidth="951.0">
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="595.0" prefWidth="867.0">
                            <children>
-                              <Label prefHeight="27.0" prefWidth="722.0" text="Customer Accounts">
-                                 <VBox.margin>
-                                    <Insets left="20.0" top="20.0" />
-                                 </VBox.margin>
-                                 <font>
-                                    <Font size="32.0" />
-                                 </font>
-                              </Label>
-                              <Separator prefWidth="200.0" />
+                              <Label text="Type" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0" />
+                              <ComboBox layoutX="23.0" layoutY="60.0" prefHeight="39.0" prefWidth="844.0" promptText="Select an account type" AnchorPane.leftAnchor="20.0" />
+                              <Label layoutX="21.0" layoutY="103.0" text="Account Name" AnchorPane.leftAnchor="20.0" />
+                              <TextField layoutX="24.0" layoutY="134.0" prefHeight="39.0" prefWidth="844.0" AnchorPane.leftAnchor="20.0" />
+                              <TextField layoutX="24.0" layoutY="213.0" prefHeight="39.0" prefWidth="844.0" promptText="LastName, Firstname" AnchorPane.leftAnchor="20.0" />
+                              <Label layoutX="21.0" layoutY="182.0" text="Account Holder" AnchorPane.leftAnchor="20.0" />
+                              <Label layoutX="23.0" layoutY="266.0" text="Account Number" AnchorPane.leftAnchor="20.0" />
+                              <TextField layoutX="26.0" layoutY="297.0" prefHeight="39.0" prefWidth="844.0" AnchorPane.leftAnchor="20.0" />
+                              <TextField layoutX="27.0" layoutY="375.0" prefHeight="39.0" prefWidth="844.0" AnchorPane.leftAnchor="20.0" />
+                              <Label layoutX="22.0" layoutY="344.0" text="Swift" AnchorPane.leftAnchor="20.0" />
+                              <Label layoutX="23.0" layoutY="428.0" text="Opening Balance" AnchorPane.leftAnchor="20.0" />
+                              <TextField layoutX="25.0" layoutY="455.0" prefHeight="39.0" prefWidth="844.0" promptText="0.00" AnchorPane.leftAnchor="20.0" />
+                              <Button layoutX="28.0" layoutY="522.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="247.0" text="Create New Bank Account" />
+                              <Button layoutX="286.0" layoutY="522.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="201.0" text="Clear" />
                            </children>
-                        </VBox>
+                        </AnchorPane>
                      </content>
                   </Tab>
-                <Tab text="Address" />
-                  <Tab text="Contacts" />
-                  <Tab text="Notes" />
-              </tabs>
+               </tabs>
             </TabPane>
-         </children></Pane>
+         </children>
+      </AnchorPane>
    </children>
-</AnchorPane>
+</Pane>

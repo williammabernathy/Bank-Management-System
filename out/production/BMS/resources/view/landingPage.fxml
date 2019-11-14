@@ -10,7 +10,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="787.0" prefWidth="1460.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.landingPageController">
+<AnchorPane prefHeight="787.0" prefWidth="1460.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.LandingPageController">
    <children>
       <VBox layoutX="-6.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="787.0" prefWidth="277.0" style="-fx-background-color: #96d1c7;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-6.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -56,13 +56,20 @@
             </Button>
          </children>
       </VBox>
-      <TextField fx:id="searchTextField" alignment="CENTER_RIGHT" layoutX="275.0" layoutY="14.0" prefHeight="39.0" prefWidth="861.0" promptText="search" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);" AnchorPane.leftAnchor="275.0" AnchorPane.rightAnchor="324.0" AnchorPane.topAnchor="14.0" />
+      <TextField fx:id="searchTextField" alignment="CENTER_RIGHT" layoutX="275.0" layoutY="14.0" prefHeight="14.0" prefWidth="861.0" promptText="search" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);" visible="false" AnchorPane.leftAnchor="275.0" AnchorPane.rightAnchor="324.0" AnchorPane.topAnchor="14.0">
+         <font>
+            <Font size="14.0" />
+         </font></TextField>
       <Button fx:id="loggedUserActorButton" layoutX="1238.0" layoutY="14.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="285.0" style="-fx-background-color: #fffdf9; -fx-background-radius: 50px; -fx-border-radius: 50px;" text="loggedUName" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="14.0" />
-      <Pane fx:id="interactivePane" layoutX="275.0" layoutY="63.0" prefHeight="710.0" prefWidth="1176.0">
+      <AnchorPane layoutX="275.0" layoutY="63.0">
          <children>
-            <Pane fx:id="dialogueAccountPane" layoutX="-48.0" layoutY="-5.0" prefHeight="241.0" prefWidth="323.0" />
-            <Pane fx:id="dialogueMoneyExchangePane" layoutX="-58.0" layoutY="-15.0" prefHeight="241.0" prefWidth="323.0" />
+            <Pane fx:id="interactivePane" prefHeight="710.0" prefWidth="1176.0">
+               <children>
+                  <Pane fx:id="dialogueAccountPane" layoutX="306.0" layoutY="44.0" prefHeight="241.0" prefWidth="323.0" />
+                  <Pane fx:id="dialogueMoneyExchangePane" layoutX="306.0" layoutY="44.0" prefHeight="241.0" prefWidth="323.0" />
+               </children>
+            </Pane>
          </children>
-      </Pane>
+      </AnchorPane>
    </children>
 </AnchorPane>

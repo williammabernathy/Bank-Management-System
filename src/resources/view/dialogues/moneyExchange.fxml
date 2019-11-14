@@ -8,7 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox fx:id="accountOptionsVBox1" prefHeight="109.0" prefWidth="252.0" style="-fx-background-color: #96d1c7;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:id="accountOptionsVBox1" prefHeight="109.0" prefWidth="252.0" style="-fx-background-color: #96d1c7;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.LandingPageController">
    <children>
       <Button fx:id="depositMoneyButton" minHeight="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="240.0" style="-fx-background-color: grey;" text="Deposit Money" textAlignment="CENTER" textFill="WHITE">
          <font>
