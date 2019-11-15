@@ -18,8 +18,9 @@ public class LoginController {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(getClass().getResource("../../resources/view/landingPage.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 1054, 702);
+            Scene scene = new Scene(fxmlLoader.load(), 1251, 787);
             Stage stage = new Stage();
+            stage.setResizable(false);
             stage.setTitle("Bank Management System");
             stage.setScene(scene);
             stage.show();

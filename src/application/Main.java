@@ -20,11 +20,10 @@ public class Main extends Application
 
         System.out.println(connection);
 
-        Parent root = FXMLLoader.load(getClass().getResource("../resources/view/landingPage.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../resources/view/loginPage.fxml"));
         primaryStage.setTitle("Bank Management System");
-        primaryStage.setScene(new Scene(root, 1251, 787));
-        //primaryStage.setResizable(false);
-//        primaryStage.initStyle(StageStyle.UNDECORATED);
+        primaryStage.setScene(new Scene(root, 800, 600));
+        primaryStage.setResizable(false);
         primaryStage.show();
     }
 
