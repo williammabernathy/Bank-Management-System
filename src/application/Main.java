@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 import application.controllers.ConnectDB;
 
 import java.sql.Connection;
-import javafx.stage.StageStyle;
+
 public class Main extends Application
 {
     private static Connection connection;
@@ -18,13 +18,12 @@ public class Main extends Application
     {
         connection = ConnectDB.setupConnection();
 
-        //System.out.println(connection);
+        System.out.println(connection);
 
-        Parent root = FXMLLoader.load(getClass().getResource("../resources/view/login.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../resources/view/loginPage.fxml"));
         primaryStage.setTitle("Bank Management System");
-        primaryStage.setScene(new Scene(root, 300, 275));
+        primaryStage.setScene(new Scene(root, 800, 600));
         primaryStage.setResizable(false);
-        primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.show();
     }
 
