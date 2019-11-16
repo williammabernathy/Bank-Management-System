@@ -1,6 +1,18 @@
 package application.custClasses;
 
+import application.controllers.ConnectDB;
+import application.controllers.LoginController;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Customer
 {
@@ -11,13 +23,14 @@ public class Customer
     private String phoneNum;
     private Date birthday;
     private int age;
+    private static Connection connection;
 
     Customer()
     {
 
     }
 
-    Customer(String custID, String Fname, String Lname, String address, String phoneNum, Date birthday, int age)
+    Customer(String custID, String Fname, String Lname, String address, String phoneNum, Date birthday)
     {
         this.custID = custID;
         this.Fname = Fname;
@@ -25,78 +38,118 @@ public class Customer
         this.address = address;
         this.phoneNum = phoneNum;
         this.birthday = birthday;
-        this.age = age;
     }
 
     // getters
-    String getCustID()
+    public String getCustID()
     {
         return this.custID;
     }
 
-    String getFname()
+    public String getFname()
     {
         return this.Fname;
     }
 
-    String getLname()
+    public String getLname()
     {
         return this.Lname;
     }
 
-    String getAddress()
+    public String getAddress()
     {
         return this.address;
     }
 
-    String getPhoneNum()
+    public String getPhoneNum()
     {
         return this.phoneNum;
     }
 
-    Date getBirthday()
+    public Date getBirthday()
     {
         return this.birthday;
     }
 
-    int getAge()
+    public int getAge()
     {
         return this.age;
     }
 
     // setters
-    void setCustID(String custID)
+    public void setCustID(String custID)
     {
         this.custID = custID;
     }
 
-    void setFname(String Fname)
+    public void setFname(String Fname)
     {
         this.Fname = Fname;
     }
 
-    void setLname(String Lname)
+    public void setLname(String Lname)
     {
         this.Lname = Lname;
     }
 
-    void setAddress(String address)
+    public void setAddress(String address)
     {
         this.address = address;
     }
 
-    void setPhoneNum(String phoneNum)
+    public void setPhoneNum(String phoneNum)
     {
         this.phoneNum = phoneNum;
     }
 
-    void setBirthday(Date birthday)
+    public void setBirthday(Date birthday)
     {
         this.birthday = birthday;
     }
 
-    void setAge(int age)
+    public void setAge(int age)
     {
         this.age = age;
+    }
+
+    public String toString()
+    {
+        return ""+Fname+" "+Lname+"";
+    }
+
+    public static ObservableList<Customer> getAllCustomers()
+    {
+        connection = ConnectDB.setupConnection();
+        ObservableList<Customer> allCustomers = FXCollections.observableArrayList();
+
+        try
+        {
+            String query = "select * from customer";
+            Statement st = connection.createStatement();
+            ResultSet rs = st.executeQuery(query);
+
+            //String custID, String Fname, String Lname, String address, String phoneNum, Date birthday, int age
+            while (rs.next())
+            {
+                String custID = rs.getString("customerID");
+                String Fname = rs.getString("customerFname");
+                String Lname = rs.getString("customerLname");
+                String address = rs.getString("customerAddress");
+                String phoneNum = rs.getString("customerPhone");
+                Date birthday = rs.getDate("customerBirthday");
+
+                Customer cust = new Customer(custID, Fname, Lname, address, phoneNum, birthday);
+
+                allCustomers.add(cust);
+            }
+            st.close();
+        }
+        catch(Exception e)
+        {
+            Logger logger = Logger.getLogger(Employee.class.getName());
+            logger.log(Level.SEVERE, "Failed to connect to database:", e);
+        }
+
+        return allCustomers;
     }
 }
