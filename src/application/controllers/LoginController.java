@@ -24,8 +24,7 @@ public class LoginController
     @FXML private TextField useranameTextField;
     private static String loggedUser;
 
-    public void handleLoginButtonAction(MouseEvent mouseEvent)
-    {
+    public void handleLoginButtonAction(MouseEvent mouseEvent) throws IOException {
         // Authenticate user here
         // and display landing page if true
         String validateUser, validatePass;
@@ -38,6 +37,7 @@ public class LoginController
         //call validation method
         verification = Employee.validateLogin(validateUser, validatePass);
 
+<<<<<<< HEAD
         //check if password matched
         if(verification == 1)
         {
@@ -66,6 +66,39 @@ public class LoginController
             useranameTextField.clear();
             passwordTextField.clear();
         }
+=======
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("../../resources/view/landingPage.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 1251, 787);
+        Stage stage = new Stage();
+        //stage.setResizable(false);
+        stage.setTitle("Bank Management System");
+        stage.setScene(scene);
+        stage.show();
+//        if(verification == 1)
+//        {
+//            try
+//            {
+//                FXMLLoader fxmlLoader = new FXMLLoader();
+//                fxmlLoader.setLocation(getClass().getResource("../../resources/view/landingPage.fxml"));
+//                Scene scene = new Scene(fxmlLoader.load(), 1251, 787);
+//                Stage stage = new Stage();
+//                stage.setResizable(false);
+//                stage.setTitle("Bank Management System");
+//                stage.setScene(scene);
+//                stage.show();
+//            }
+//            catch (IOException e)
+//            {
+//                Logger logger = Logger.getLogger(getClass().getName());
+//                logger.log(Level.SEVERE, "Failed to create loading window", e);
+//            }
+//        }
+//        else
+//        {
+//
+//        }
+>>>>>>> e7d6379f4a9e9afc3a2223fe52d568b68ee5afaf
     }
 
     public static void setUsername(String user)

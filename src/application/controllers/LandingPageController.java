@@ -19,6 +19,7 @@ public class LandingPageController {
     @FXML private Button loggedUserActorButton;
     @FXML private Button createNewAccountButton;
     @FXML private Button selectAccountButton;
+    @FXML private Button CancelButton;
     @FXML private Pane selectCustomerPane;
     @FXML private Pane createNewCustomerPane;
     @FXML private Pane modifyCustomerPane;
@@ -28,7 +29,8 @@ public class LandingPageController {
     @FXML private HBox searchBox;
     @FXML private TableView accountTableView;
     @FXML private TextField searchTextField;
-
+    @FXML private TextField phoneTextField;
+    @FXML private TextField lastNameTextField;
 
     public LandingPageController(){
 
