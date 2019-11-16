@@ -3,9 +3,11 @@ package application.controllers;
 import application.custClasses.Employee;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -27,14 +29,19 @@ public class LoginController
         // Authenticate user here
         // and display landing page if true
         String validateUser, validatePass;
-        int verification;
+        int verification = 0;
 
+        //get username text
         validateUser = useranameTextField.getText();
+        //get password text
         validatePass = passwordTextField.getText();
+        //call validation method
         verification = Employee.validateLogin(validateUser, validatePass);
 
+        //check if password matched
         if(verification == 1)
         {
+            System.out.println(loggedUser);
             try
             {
                 FXMLLoader fxmlLoader = new FXMLLoader();
@@ -54,12 +61,20 @@ public class LoginController
         }
         else
         {
-
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Invalid Username or Password", ButtonType.OK);
+            alert.showAndWait();
+            useranameTextField.clear();
+            passwordTextField.clear();
         }
     }
 
-    public void setUsername(String user)
+    public static void setUsername(String user)
     {
         loggedUser = user;
+    }
+
+    public static String getUsername()
+    {
+        return loggedUser;
     }
 }

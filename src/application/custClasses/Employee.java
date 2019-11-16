@@ -1,6 +1,7 @@
 package application.custClasses;
 
 import application.controllers.ConnectDB;
+import application.controllers.LoginController;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -87,20 +88,19 @@ public class Employee
     public static int validateLogin(String enteredUser, String enteredPass)
     {
         connection = ConnectDB.setupConnection();
+        int count = 0;
         try
         {
             String query = "select * from employee where employeeUsername = '"+enteredUser+"' AND employeePassword = PASSWORD('"+enteredPass+"')";
             Statement st = connection.createStatement();
             ResultSet rs = st.executeQuery(query);
 
-            /*
             while (rs.next())
             {
-
+                LoginController.setUsername(rs.getString("employeeUsername"));
+                count++;
             }
-            */
             st.close();
-            return 1;
         }
         catch(Exception e)
         {
@@ -108,6 +108,6 @@ public class Employee
             logger.log(Level.SEVERE, "Failed to connect to database:", e);
         }
 
-        return 0;
+        return count;
     }
 }
