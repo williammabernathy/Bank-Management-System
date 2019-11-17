@@ -11,6 +11,10 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+
 public class LandingPageController {
     @FXML private Button modifyButton;
     @FXML private Button selectButton;
@@ -22,21 +26,35 @@ public class LandingPageController {
     @FXML private Button loggedUserActorButton;
     @FXML private Button createNewAccountButton;
     @FXML private Button selectAccountButton;
-    @FXML private Button CancelButton;
+
     @FXML private Pane selectCustomerPane;
     @FXML private Pane createNewCustomerPane;
     @FXML private Pane modifyCustomerPane;
     @FXML private Pane createNewAccountPane;
     @FXML private Pane customerListPane;
     @FXML private Pane accountPane;
+
     @FXML private HBox searchBox;
+
     @FXML private Label displaySelectedCustomer;
+
     @FXML private TextField searchTextField;
-    @FXML private TextField phoneTextField;
-    @FXML private TextField lastNameTextField;
+
     @FXML private ListView customerListView;
     @FXML private ListView customerAccountListView;
     @FXML private ListView allAccountsListView;
+
+    //create customer fields
+    @FXML private Button CancelButtonClicked;
+    @FXML private Button submitNewCustomerButton;
+    @FXML private TextField firstNameTextField;
+    @FXML private TextField lastNameTextField;
+    @FXML private TextField phoneTextField;
+    @FXML private DatePicker datePickerField;
+    @FXML private TextField addressTextField;
+    @FXML private TextField cityTextField;
+    @FXML private TextField stateTextField;
+    @FXML private TextField zipcodeTextField;
 
     private static ObservableList<Customer> allCustomers;
     private static ObservableList<Account> allAccounts;
@@ -44,6 +62,22 @@ public class LandingPageController {
     public LandingPageController()
     {
 
+    }
+
+    // refresh all contents of the customer listview
+    public void refreshCustomerListView()
+    {
+        //clear the current items in the listview
+        customerListView.getItems().clear();
+
+        //set the customer listview selection type to only allow a single customer to be selected
+        customerListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+
+        //get all customers from database
+        allCustomers = Customer.getAllCustomers();
+
+        //fill the listview with all customers
+        customerListView.getItems().addAll(allCustomers);
     }
 
     //all elements to be called when scene is first loaded should be here
@@ -65,6 +99,8 @@ public class LandingPageController {
     // select customer button
     public void selectButtonClicked(ActionEvent event)
     {
+        allAccountsListView.getItems().clear();
+
         Customer item = (Customer) customerListView.getSelectionModel().getSelectedItem();
 
         //if nothing is selected
@@ -90,16 +126,79 @@ public class LandingPageController {
         }
     }
 
-    //modify customer information from customer tab
+    // modify customer information from customer tab
     public void modifyButtonClicked(MouseEvent mouseEvent) {
         searchBox.setVisible(false);
         displaySelectedView(modifyCustomerPane);
     }
 
-    //create a new customer from the customer tab
+    // create a new customer from the customer tab
     public void createNewCustomerButtonClicked(MouseEvent mouseEvent) {
         searchBox.setVisible(false);
         displaySelectedView(createNewCustomerPane);
+    }
+
+    // submit a newly created customer from the new/create customer tab
+    public void submitNewCustomerButtonClicked(ActionEvent event)
+    {
+        // check that all input fields have a value
+        if(firstNameTextField.getText() == null || lastNameTextField.getText() == null || phoneTextField.getText() == null || datePickerField.getValue() == null ||
+                addressTextField.getText() == null || cityTextField.getText() == null || stateTextField.getText() == null || zipcodeTextField.getText() == null)
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "All fields must be entered!", ButtonType.OK);
+            alert.showAndWait();
+        }
+        else
+        {
+            // if all inputs are present, get the values to pass
+            String firstName = firstNameTextField.getText();
+            String lastName = lastNameTextField.getText();
+            String phoneNum = phoneTextField.getText();
+            LocalDate birthday = datePickerField.getValue();
+            String address = addressTextField.getText();
+            String city = cityTextField.getText();
+            String state = stateTextField.getText();
+            String zip = zipcodeTextField.getText();
+
+            // insert new customer into database
+            int check = Customer.createNewCustomer(firstName, lastName, phoneNum, birthday, address, city, state, zip);
+
+            // if check > 1, insert was successful
+            if(check > 0)
+            {
+                // display success notification
+                Alert alert = new Alert(Alert.AlertType.ERROR, "New customer created!", ButtonType.OK);
+                alert.showAndWait();
+
+                // clear all fields
+                firstNameTextField.clear();
+                lastNameTextField.clear();
+                phoneTextField.clear();
+                datePickerField.setValue(null);
+                addressTextField.clear();
+                cityTextField.clear();
+                stateTextField.clear();
+                zipcodeTextField.clear();
+
+                //refresh list view
+                refreshCustomerListView();
+
+                //return to customer list
+                displaySelectedView(customerListPane);
+            }
+            // something went wrong with insert
+            else
+            {
+                // display error message
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Something went wrong while trying to insert a new customer", ButtonType.OK);
+                alert.showAndWait();
+            }
+        }
+    }
+
+    public void cancelNewCustomerButtonClicked(ActionEvent event)
+    {
+
     }
 
     //log out button

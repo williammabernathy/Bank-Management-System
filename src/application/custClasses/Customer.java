@@ -8,6 +8,8 @@ import javafx.collections.ObservableList;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -151,5 +153,34 @@ public class Customer
         }
 
         return allCustomers;
+    }
+
+    public static int createNewCustomer(String firstName, String lastName, String phoneNum, LocalDate birthday, String address, String city, String state, String zip)
+    {
+        connection = ConnectDB.setupConnection();
+        DateTimeFormatter form = DateTimeFormatter.ofPattern("MM/dd/YYYY");
+        int count = 0;
+        System.out.println("beginning of query");
+
+        try
+        {
+            String query = "INSERT INTO Customer (customerFname, customerLname, customerAddress, customerPhone, customerBirthday) " +
+                    "VALUES('"+firstName+"', '"+lastName+"', '"+address+"', '"+phoneNum+"', STR_TO_DATE('"+form.format(birthday)+"', '%m/%d/%Y'));";
+            Statement st = connection.createStatement();
+            int rs = st.executeUpdate(query);
+
+            if(rs > 0)
+            {
+                count++;
+            }
+            st.close();
+        }
+        catch(Exception e)
+        {
+            Logger logger = Logger.getLogger(Employee.class.getName());
+            logger.log(Level.SEVERE, "Failed to connect to database:", e);
+        }
+
+        return count;
     }
 }
