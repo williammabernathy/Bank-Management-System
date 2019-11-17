@@ -86,6 +86,11 @@ public class Account
         this.accAmount = accAmount;
     }
 
+    public String toString()
+    {
+        return ""+accType+": "+accAmount+"";
+    }
+
     public static ObservableList<Account> getAllAccounts(String custID)
     {
         connection = ConnectDB.setupConnection();

@@ -2,7 +2,6 @@ package application.controllers;
 
 import application.custClasses.Account;
 import application.custClasses.Customer;
-import application.custClasses.Employee;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,8 +9,7 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-
-import java.util.ArrayList;
+import javafx.stage.Stage;
 
 public class LandingPageController {
     @FXML private Button modifyButton;
@@ -32,13 +30,13 @@ public class LandingPageController {
     @FXML private Pane customerListPane;
     @FXML private Pane accountPane;
     @FXML private HBox searchBox;
-    @FXML private TableView accountTableView;
     @FXML private Label displaySelectedCustomer;
     @FXML private TextField searchTextField;
     @FXML private TextField phoneTextField;
     @FXML private TextField lastNameTextField;
     @FXML private ListView customerListView;
     @FXML private ListView customerAccountListView;
+    @FXML private ListView allAccountsListView;
 
     private static ObservableList<Customer> allCustomers;
     private static ObservableList<Account> allAccounts;
@@ -51,9 +49,16 @@ public class LandingPageController {
     //all elements to be called when scene is first loaded should be here
     public void initialize()
     {
+        //set the customer listview selection type to only allow a single customer to be selected
         customerListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+
+        //update logout button with what user is currently logged in
         loggedUserActorButton.setText("Log out of: "+ LoginController.getUsername());
+
+        //get all customers from database
         allCustomers = Customer.getAllCustomers();
+
+        //fill the listview with all customers
         customerListView.getItems().addAll(allCustomers);
     }
 
@@ -61,9 +66,28 @@ public class LandingPageController {
     public void selectButtonClicked(ActionEvent event)
     {
         Customer item = (Customer) customerListView.getSelectionModel().getSelectedItem();
-        displaySelectedCustomer.setText("Selected Customer: " + item.getFname());
-        Account.getAllAccounts(item.getCustID());
-        customerAccountListView.getItems().addAll(allCustomers);
+
+        //if nothing is selected
+        if(item == null)
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Please select a customer.", ButtonType.OK);
+            alert.showAndWait();
+        }
+        //if a customer IS selected
+        else
+        {
+            //get the selected Customer object
+            item = (Customer) customerListView.getSelectionModel().getSelectedItem();
+
+            //set the text to display what customer we are working with
+            displaySelectedCustomer.setText("Selected Customer: " + item.getFname());
+
+            //get all accounts related to the selected customers
+            allAccounts = Account.getAllAccounts(item.getCustID());
+
+            //fill listview with accounts under that customer
+            allAccountsListView.getItems().addAll(allAccounts);
+        }
     }
 
     //modify customer information from customer tab
@@ -78,8 +102,17 @@ public class LandingPageController {
         displaySelectedView(createNewCustomerPane);
     }
 
+    //log out button
+    public void loggedUserActorClick(ActionEvent event)
+    {
+        //get the current stage
+        Stage stage = (Stage) loggedUserActorButton.getScene().getWindow();
+
+        //close it to return to log in screen
+        stage.close();
+    }
+
     public void accountButtonClicked(MouseEvent mouseEvent) {
-        accountTableView.setDisable(true);
         searchBox.setVisible(true);
         searchTextField.setPromptText("Search for an account with account number or customer ID");
         displaySelectedView(accountPane);
@@ -96,7 +129,6 @@ public class LandingPageController {
 
     public void searchTextButtonClicked(MouseEvent mouseEvent){
         selectAccountButton.setDisable(false);
-        accountTableView.setDisable(false);
     }
 
 
