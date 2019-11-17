@@ -7,6 +7,8 @@ import javafx.collections.ObservableList;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -123,5 +125,35 @@ public class Account
         }
 
         return allAccounts;
+    }
+
+    public static int createNewAccount(String custID, String accountType, LocalDate creationDate, String amount)
+    {
+        connection = ConnectDB.setupConnection();
+        DateTimeFormatter form = DateTimeFormatter.ofPattern("MM/dd/YYYY");
+        int count = 0;
+
+        double convAmount = Double.parseDouble(amount);
+
+        try
+        {
+            String query = "INSERT INTO CustomerAccounts (customerID, accountType, creationDate, amount) " +
+                    "VALUES('"+custID+"', '"+accountType+"', STR_TO_DATE('"+form.format(creationDate)+"', '%m/%d/%Y'), "+convAmount+");";
+            Statement st = connection.createStatement();
+            int rs = st.executeUpdate(query);
+
+            if(rs > 0)
+            {
+                count++;
+            }
+            st.close();
+        }
+        catch(Exception e)
+        {
+            Logger logger = Logger.getLogger(Employee.class.getName());
+            logger.log(Level.SEVERE, "Failed to connect to database:", e);
+        }
+
+        return count;
     }
 }
