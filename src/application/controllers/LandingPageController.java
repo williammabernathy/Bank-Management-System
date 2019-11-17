@@ -16,35 +16,25 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 public class LandingPageController {
-    @FXML private Button modifyButton;
-    @FXML private Button selectButton;
-    @FXML private Button selectCreateNewCustomer;
+    // general/main pane elements
+    @FXML private TextField searchTextField;
+    @FXML private Label displaySelectedCustomer;
     @FXML private Button mainAccountButton;
     @FXML private Button mainCustomersButton;
     @FXML private Button mainLoanServices;
     @FXML private Button mainMoneyExchangeButton;
     @FXML private Button loggedUserActorButton;
-    @FXML private Button createNewAccountButton;
-    @FXML private Button selectAccountButton;
+    @FXML private HBox searchBox;
 
+    // customer search pane and children
     @FXML private Pane selectCustomerPane;
     @FXML private Pane createNewCustomerPane;
     @FXML private Pane modifyCustomerPane;
     @FXML private Pane createNewAccountPane;
     @FXML private Pane customerListPane;
-    @FXML private Pane accountPane;
-
-    @FXML private HBox searchBox;
-
-    @FXML private Label displaySelectedCustomer;
-
-    @FXML private TextField searchTextField;
-
     @FXML private ListView customerListView;
-    @FXML private ListView customerAccountListView;
-    @FXML private ListView allAccountsListView;
 
-    //create customer fields
+    // create customer fields
     @FXML private Button CancelButtonClicked;
     @FXML private Button submitNewCustomerButton;
     @FXML private TextField firstNameTextField;
@@ -56,6 +46,14 @@ public class LandingPageController {
     @FXML private TextField stateTextField;
     @FXML private TextField zipcodeTextField;
 
+    // customer account pane and children
+    @FXML private Pane accountPane;
+    @FXML private ListView customerAccountListView;
+    @FXML private ListView allAccountsListView;
+    @FXML private Button selectAccountButton;
+    @FXML private Button createNewAccountButton;
+
+    // global variables
     private static ObservableList<Customer> allCustomers;
     private static ObservableList<Account> allAccounts;
 
@@ -123,6 +121,9 @@ public class LandingPageController {
 
             //fill listview with accounts under that customer
             allAccountsListView.getItems().addAll(allAccounts);
+
+            mainLoanServices.setDisable(false);
+            mainMoneyExchangeButton.setDisable(false);
         }
     }
 
