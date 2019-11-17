@@ -36,14 +36,13 @@ employeePassword CHAR(60)
 );
 
 CREATE TABLE Transactions(
-transactionID INT(100) AUTO_INCREMENT,
-accountID INT(100),
-customerID INT(100),
+transactionID INT(100) AUTO_INCREMENT PRIMARY KEY,
+senderAccountID INT,
+receiverAccountID INT,
 transactiondate DATE,
 transactionAmount DOUBLE,
-FOREIGN KEY (customerid) REFERENCES customer(customerid),
-FOREIGN KEY (accountid) REFERENCES customeraccounts(accountid),
-PRIMARY KEY (transactionid, accountid, customerid)
+FOREIGN KEY (senderAccountID) REFERENCES customeraccounts(accountid),
+FOREIGN KEY (receiverAccountID) REFERENCES customeraccounts(accountid)
 );
 
 Delimiter //
@@ -52,7 +51,10 @@ AFTER INSERT ON transactions FOR EACH ROW
 BEGIN
 	update customeraccounts
 	SET amount = amount + NEW.transactionAmount
-	WHERE accountid = NEW.accountid AND customerid = NEW.customerid;
+	WHERE accountid = NEW.receiverAccountID;
+	UPDATE customeraccounts
+	SET amount = amount - NEW.transactionAmount
+	WHERE accountid = NEW.senderAccountID;
 	
 END;
 //
