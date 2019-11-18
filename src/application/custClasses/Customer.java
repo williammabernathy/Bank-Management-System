@@ -160,7 +160,6 @@ public class Customer
         connection = ConnectDB.setupConnection();
         DateTimeFormatter form = DateTimeFormatter.ofPattern("MM/dd/YYYY");
         int count = 0;
-        System.out.println("beginning of query");
 
         try
         {

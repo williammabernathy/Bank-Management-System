@@ -15,6 +15,8 @@ import javax.xml.soap.Text;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.function.UnaryOperator;
+import java.util.regex.Pattern;
 
 public class LandingPageController {
     // general/main pane elements
@@ -46,16 +48,21 @@ public class LandingPageController {
     @FXML private TextField stateTextField;
     @FXML private TextField zipcodeTextField;
 
-    // customer account pane and children
+    // account pane and children
     @FXML private Pane accountPane;
-    @FXML private ListView customerAccountListView;
     @FXML private ListView allAccountsListView;
     @FXML private Button selectAccountButton;
-    @FXML private Button createNewAccountButton;
+    @FXML private Button submitNewAccountButton;
+    @FXML private Button cancelNewAccountButton;
+    @FXML private TextField accountCustID;
+    @FXML private ComboBox accountTypeField;
+    @FXML private TextField accountHolderName;
+    @FXML private TextField accountBalanceField;
 
     // global variables
     private static ObservableList<Customer> allCustomers;
     private static ObservableList<Account> allAccounts;
+    Customer selectedCust;
 
     //modify customer pane and children
     @FXML private Pane modifyCustomerPane;
@@ -104,6 +111,30 @@ public class LandingPageController {
 
     }
 
+    //all elements to be called when scene is first loaded should be here
+    public void initialize()
+    {
+        //fill combobox in account creation pane with values
+        accountTypeField.getItems().addAll("Checking", "Savings", "Loan");
+
+        //disable the sidebar buttons until customer is selected
+        mainAccountButton.setDisable(true);
+        mainLoanServices.setDisable(true);
+        mainMoneyExchangeButton.setDisable(true);
+
+        //set the customer listview selection type to only allow a single customer to be selected
+        customerListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+
+        //update logout button with what user is currently logged in
+        loggedUserActorButton.setText("Log out of: "+ LoginController.getUsername());
+
+        //get all customers from database
+        allCustomers = Customer.getAllCustomers();
+
+        //fill the listview with all customers
+        customerListView.getItems().addAll(allCustomers);
+    }
+
     // refresh all contents of the customer listview
     public void refreshCustomerListView()
     {
@@ -120,31 +151,72 @@ public class LandingPageController {
         customerListView.getItems().addAll(allCustomers);
     }
 
-    //all elements to be called when scene is first loaded should be here
-    public void initialize()
+    // refresh all contents of the customer listview
+    public void refreshAccountListView()
     {
-        //set the customer listview selection type to only allow a single customer to be selected
-        customerListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        //clear the current items in the listview
+        allAccountsListView.getItems().clear();
 
-        //update logout button with what user is currently logged in
-        loggedUserActorButton.setText("Log out of: "+ LoginController.getUsername());
+        //get all accounts related to the selected customers
+        allAccounts = Account.getAllAccounts(selectedCust.getCustID());
 
-        //get all customers from database
-        allCustomers = Customer.getAllCustomers();
-
-        //fill the listview with all customers
-        customerListView.getItems().addAll(allCustomers);
+        //fill listview with accounts under that customer
+        allAccountsListView.getItems().addAll(allAccounts);
     }
 
+    /*
+     *
+     * General/Main Pane Functions
+     *
+     */
+    //log out button
+    public void loggedUserActorClick(ActionEvent event)
+    {
+        //get the current stage
+        Stage stage = (Stage) loggedUserActorButton.getScene().getWindow();
+
+        //close it to return to log in screen
+        stage.close();
+    }
+
+    //account sidebar button
+    public void accountButtonClicked(MouseEvent mouseEvent)
+    {
+        searchBox.setVisible(true);
+        searchTextField.setPromptText("Search for an account with account number or customer ID");
+        displaySelectedView(accountPane);
+
+        accountCustID.setText(selectedCust.getCustID());
+        accountHolderName.setText(selectedCust.getLname() +" "+selectedCust.getFname());
+    }
+
+    //customer side bar button
+    public void customersButtonClicked(MouseEvent mouseEvent)
+    {
+        displaySelectedView(customerListPane);
+        searchTextField.setPromptText("Search for an customer with name or customer ID");
+        searchBox.setVisible(true);
+    }
+
+    public void searchTextButtonClicked(MouseEvent mouseEvent)
+    {
+        selectAccountButton.setDisable(false);
+    }
+
+    /*
+     *
+     * Customer List Pane (Home)
+     *
+     */
     // select customer button
     public void selectButtonClicked(ActionEvent event)
     {
         allAccountsListView.getItems().clear();
 
-        Customer item = (Customer) customerListView.getSelectionModel().getSelectedItem();
+        selectedCust = (Customer) customerListView.getSelectionModel().getSelectedItem();
 
         //if nothing is selected
-        if(item == null)
+        if(selectedCust == null)
         {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Please select a customer.", ButtonType.OK);
             alert.showAndWait();
@@ -153,19 +225,20 @@ public class LandingPageController {
         else
         {
             //get the selected Customer object
-            item = (Customer) customerListView.getSelectionModel().getSelectedItem();
+            selectedCust = (Customer) customerListView.getSelectionModel().getSelectedItem();
 
             //set the text to display what customer we are working with
-            displaySelectedCustomer.setText("Selected Customer: " + item.getFname());
+            displaySelectedCustomer.setText("Selected Customer: " + selectedCust.getFname());
 
             //get all accounts related to the selected customers
-            allAccounts = Account.getAllAccounts(item.getCustID());
+            allAccounts = Account.getAllAccounts(selectedCust.getCustID());
 
             //fill listview with accounts under that customer
             allAccountsListView.getItems().addAll(allAccounts);
 
             mainLoanServices.setDisable(false);
             mainMoneyExchangeButton.setDisable(false);
+            mainAccountButton.setDisable(false);
         }
     }
 
@@ -181,6 +254,11 @@ public class LandingPageController {
         displaySelectedView(createNewCustomerPane);
     }
 
+    /*
+    *
+    * Create Customer Pane
+    *
+    */
     // submit a newly created customer from the new/create customer tab
     public void submitNewCustomerButtonClicked(ActionEvent event)
     {
@@ -210,7 +288,7 @@ public class LandingPageController {
             if(check > 0)
             {
                 // display success notification
-                Alert alert = new Alert(Alert.AlertType.ERROR, "New customer created!", ButtonType.OK);
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "New customer created!", ButtonType.OK);
                 alert.showAndWait();
 
                 // clear all fields
@@ -239,69 +317,165 @@ public class LandingPageController {
         }
     }
 
+    // cancel creating new customer
     public void cancelNewCustomerButtonClicked(ActionEvent event)
     {
+        // clear all fields
+        firstNameTextField.clear();
+        lastNameTextField.clear();
+        phoneTextField.clear();
+        datePickerField.setValue(null);
+        addressTextField.clear();
+        cityTextField.clear();
+        stateTextField.clear();
+        zipcodeTextField.clear();
 
-    }
+        //refresh list view
+        refreshCustomerListView();
 
-    //log out button
-    public void loggedUserActorClick(ActionEvent event)
-    {
-        //get the current stage
-        Stage stage = (Stage) loggedUserActorButton.getScene().getWindow();
-
-        //close it to return to log in screen
-        stage.close();
-    }
-
-    public void accountButtonClicked(MouseEvent mouseEvent) {
-        searchBox.setVisible(true);
-        searchTextField.setPromptText("Search for an account with account number or customer ID");
-        displaySelectedView(accountPane);
-    }
-
-    public void customersButtonClicked(MouseEvent mouseEvent) {
+        //return to customer list
         displaySelectedView(customerListPane);
+    }
+
+    public void cancelNewCustomerButtonClicked(MouseEvent mouseEvent)
+    {
+        searchBox.setVisible(true); displaySelectedView(customerListPane);
         searchTextField.setPromptText("Search for an customer with name or customer ID");
-        searchBox.setVisible(true);
     }
 
-    public void cancelNewCustomerButtonClicked(MouseEvent mouseEvent) {searchBox.setVisible(true); displaySelectedView(customerListPane); searchTextField.setPromptText("Search for an customer with name or customer ID");}
-    public void submitNewCustomerButtonClicked(MouseEvent mouseEvent) {searchBox.setVisible(false);/*get data entered by employee and update database */}
-
-    public void searchTextButtonClicked(MouseEvent mouseEvent){
-        selectAccountButton.setDisable(false);
+    public void submitNewCustomerButtonClicked(MouseEvent mouseEvent)
+    {
+        searchBox.setVisible(false); /*get data entered by employee and update database */
     }
 
+    /*
+    *
+    * Account List Pane
+    *
+    */
 
+    public void createNewAccountButtonClicked(MouseEvent mouseEvent)
+    {
+        searchBox.setVisible(false);
+        displaySelectedView(createNewAccountPane);
+    }
+
+    public void closeAccountButtonClicked(MouseEvent mouseEvent)
+    {
+
+    }
+
+    /*
+    *
+    * Creating New Account
+    *
+    */
+    //submit the new account
+    public void submitNewAccount(ActionEvent mouseEvent)
+    {
+        //check that balance is a double/number
+        try
+        {
+            Double.parseDouble(accountBalanceField.getText());
+        }
+        catch (NumberFormatException e)
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Balance must be a number!", ButtonType.OK);
+            alert.showAndWait();
+
+<<<<<<< HEAD
     public void displaySelectedView(Pane selectedView){
          Pane[] arrayOfViews = {customerListPane, createNewAccountPane, modifyCustomerPane, createNewCustomerPane, selectCustomerPane, accountPane, moneyExchangePane, loanServicesPane};
         for (Pane p: arrayOfViews) {
             if (p != selectedView){
                 p.setVisible(false);
-            }
-            else {
-                p.setVisible(true);
-            }
+=======
+            accountBalanceField.clear();
+            return;
         }
+        //check that all fields have data
+        if(accountBalanceField.getText() == null || accountTypeField.getValue() == null)
+        {
+            // display error message
+            Alert alert = new Alert(Alert.AlertType.ERROR, "All fields must be entered!", ButtonType.OK);
+            alert.showAndWait();
+        }
+        else
+        {
+            //get entered values
+            String customerID = accountCustID.getText();
+            String accountType = "";
+            if(accountTypeField.getValue() == "Savings")
+            {
+                accountType = "S";
+>>>>>>> 955a46e655cba055dd17aec85af56adf855eec5e
+            }
+            else if(accountTypeField.getValue() == "Checking")
+            {
+                accountType = "C";
+            }
+            else if(accountTypeField.getValue() == "Loan")
+            {
+                accountType = "L";
+            }
+            LocalDate creationDate = java.time.LocalDate.now();
+            String amount = accountBalanceField.getText();
+
+            //query database with entered information
+            int check = Account.createNewAccount(customerID, accountType, creationDate, amount);
+
+            // if check > 1, insert was successful
+            if(check > 0)
+            {
+                // display success notification
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "New Account created!", ButtonType.OK);
+                alert.showAndWait();
+
+                // clear all fields
+                accountTypeField.valueProperty().set(null);
+                accountBalanceField.clear();
+
+                //refresh list view
+                refreshAccountListView();
+
+                //return to customer list
+                displaySelectedView(accountPane);
+            }
+            // something went wrong with insert
+            else
+            {
+                // display error message
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Something went wrong while trying to create a new account!", ButtonType.OK);
+                alert.showAndWait();
+            }
+
+        }
+    }
+
+    //cancel creating the account
+    public void cancelNewAccount(ActionEvent mouseEvent)
+    {
+        accountTypeField.valueProperty().set(null);
+        accountBalanceField.clear();
+
+        //refresh list view
+        refreshAccountListView();
+
+        //return to customer list
+        displaySelectedView(accountPane);
+    }
+
+    /*
+    *
+    * Loan Services Pane
+    *
+    */
+    public void loanServicesButtonClicked(MouseEvent mouseEvent)
+    {
 
     }
 
-
-    public void createNewAccountButtonClicked(MouseEvent mouseEvent) {
-        searchBox.setVisible(false);
-        displaySelectedView(createNewAccountPane);
-    }
-
-    public void closeAccountButtonClicked(MouseEvent mouseEvent) {
-    }
-
-    public void submitNewAccountButtonClicked(MouseEvent mouseEvent) {
-    }
-
-    public void selectAccountButtonClicked(MouseEvent mouseEvent) {
-    }
-
+<<<<<<< HEAD
     public void loanServicesButtonClicked(ActionEvent mouseEvent) {
         searchBox.setVisible(false);
         displaySelectedView(loanServicesPane);
@@ -319,5 +493,33 @@ public class LandingPageController {
     }
 
     public void submitTransferButtonClicked(ActionEvent actionEvent) {
+=======
+    /*
+     *
+     * Money Services Pane
+     *
+     */
+    public void moneyExchangeButtonClicked(MouseEvent mouseEvent)
+    {
+
+    }
+
+    /*
+     *
+     * Other
+     *
+     */
+    public void displaySelectedView(Pane selectedView)
+    {
+        Pane[] arrayOfViews = {customerListPane, createNewAccountPane, modifyCustomerPane, createNewCustomerPane,selectCustomerPane, accountPane};
+        for (Pane p: arrayOfViews) {
+            if (p != selectedView){
+                p.setVisible(false);
+            }
+            else {
+                p.setVisible(true);
+            }
+        }
+>>>>>>> 955a46e655cba055dd17aec85af56adf855eec5e
     }
 }
