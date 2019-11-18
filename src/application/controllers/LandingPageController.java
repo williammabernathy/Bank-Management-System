@@ -378,20 +378,10 @@ public class LandingPageController {
         {
             Double.parseDouble(accountBalanceField.getText());
         }
-        catch (NumberFormatException e)
-        {
+        catch (NumberFormatException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Balance must be a number!", ButtonType.OK);
             alert.showAndWait();
 
-<<<<<<< HEAD
-    public void displaySelectedView(Pane selectedView){
-         Pane[] arrayOfViews = {customerListPane, createNewAccountPane, modifyCustomerPane, createNewCustomerPane, selectCustomerPane, accountPane, moneyExchangePane, loanServicesPane};
-        for (Pane p: arrayOfViews) {
-            if (p != selectedView){
-                p.setVisible(false);
-=======
-            accountBalanceField.clear();
-            return;
         }
         //check that all fields have data
         if(accountBalanceField.getText() == null || accountTypeField.getValue() == null)
@@ -408,7 +398,6 @@ public class LandingPageController {
             if(accountTypeField.getValue() == "Savings")
             {
                 accountType = "S";
->>>>>>> 955a46e655cba055dd17aec85af56adf855eec5e
             }
             else if(accountTypeField.getValue() == "Checking")
             {
@@ -470,56 +459,49 @@ public class LandingPageController {
     * Loan Services Pane
     *
     */
-    public void loanServicesButtonClicked(MouseEvent mouseEvent)
-    {
-
-    }
-
-<<<<<<< HEAD
     public void loanServicesButtonClicked(ActionEvent mouseEvent) {
         searchBox.setVisible(false);
         displaySelectedView(loanServicesPane);
     }
-
-    public void moneyExchangeButtonClicked(ActionEvent actionEvent) {
-        searchBox.setVisible(false);
-        displaySelectedView(moneyExchangePane);
-    }
-
-    public void submitWithdrawButtonClicked(ActionEvent actionEvent) {
-    }
-
-    public void submitDepositButtonClicked(ActionEvent actionEvent) {
-    }
-
-    public void submitTransferButtonClicked(ActionEvent actionEvent) {
-=======
     /*
      *
      * Money Services Pane
      *
      */
-    public void moneyExchangeButtonClicked(MouseEvent mouseEvent)
-    {
+            public void submitWithdrawButtonClicked(ActionEvent actionEvent) {
+            }
 
-    }
+            public void submitDepositButtonClicked(ActionEvent actionEvent) {
+            }
+
+            public void submitTransferButtonClicked(ActionEvent actionEvent) {
+
+            }
 
     /*
      *
      * Other
      *
      */
-    public void displaySelectedView(Pane selectedView)
-    {
-        Pane[] arrayOfViews = {customerListPane, createNewAccountPane, modifyCustomerPane, createNewCustomerPane,selectCustomerPane, accountPane};
-        for (Pane p: arrayOfViews) {
-            if (p != selectedView){
+
+    public void displaySelectedView(Pane selectedView) {
+        Pane[] arrayOfViews = {customerListPane, createNewAccountPane, modifyCustomerPane, createNewCustomerPane, selectCustomerPane, accountPane, moneyExchangePane, loanServicesPane};
+        for (Pane p : arrayOfViews) {
+            if (p != selectedView) {
                 p.setVisible(false);
+                accountBalanceField.clear();
+                //return;
             }
             else {
                 p.setVisible(true);
             }
         }
->>>>>>> 955a46e655cba055dd17aec85af56adf855eec5e
+    }
+
+    public void moneyExchangeButtonClicked(ActionEvent actionEvent) {
+        displaySelectedView(moneyExchangePane);
+    }
+
+    public void submitNewAccountButtonClicked(MouseEvent mouseEvent) {
     }
 }
