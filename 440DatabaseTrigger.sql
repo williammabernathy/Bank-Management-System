@@ -77,7 +77,8 @@ INSERT INTO employee (employeeFname, employeeLname, employeeUsername, employeePa
 INSERT INTO employee (employeeFname, employeeLname, employeeUsername, employeePassword) VALUES ('zach', 'brey', 'Zbrey', PASSWORD('flawed'));
 INSERT INTO employee (employeeFname, employeeLname, employeeUsername, employeePassword) VALUES ('zach', 'bray', 'Zbray', PASSWORD('flawless'));
 
-INSERT INTO transactions (accountID, customerID, transactiondate, transactionAmount) VALUES('1', '1', STR_TO_DATE('8/31/1900', '%m/%d/%Y'), 1500.0);
+INSERT INTO transactions (senderAccountID,receiverAccountID,transactiondate,transactionAmount) VALUES(2, 1, STR_TO_DATE('8/31/1900', '%m/%d/%Y'), 100.0);
+
 
 
 
