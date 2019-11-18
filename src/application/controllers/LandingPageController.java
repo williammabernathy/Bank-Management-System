@@ -11,6 +11,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+import javax.xml.soap.Text;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
@@ -29,7 +30,6 @@ public class LandingPageController {
     // customer search pane and children
     @FXML private Pane selectCustomerPane;
     @FXML private Pane createNewCustomerPane;
-    @FXML private Pane modifyCustomerPane;
     @FXML private Pane createNewAccountPane;
     @FXML private Pane customerListPane;
     @FXML private ListView customerListView;
@@ -56,6 +56,48 @@ public class LandingPageController {
     // global variables
     private static ObservableList<Customer> allCustomers;
     private static ObservableList<Account> allAccounts;
+
+    //modify customer pane and children
+    @FXML private Pane modifyCustomerPane;
+    @FXML private TextField modifiedFirstNameTextField;
+    @FXML private TextField modifiedLastNameTextField;
+    @FXML private TextField modifiedPhoneTextField;
+    @FXML private DatePicker modifedDatePickerField;
+    @FXML private TextField modifiedAddressTextField;
+    @FXML private TextField modifiedCityTextField;
+    @FXML private TextField mofifiedStateTextField;
+    @FXML private TextField modifiedZipcodeTextField;
+    @FXML private Button submitModifiedButton;
+    @FXML private Button cancelModifiedButtonClicked;
+
+    //Money Exchange
+    @FXML private TextArea moneyExchangeTextArea;
+    @FXML private Pane moneyExchangePane;
+
+    //Withdraw Money Pane children
+    @FXML private TextField withdrawAmountTextField;
+    @FXML private ComboBox withdrawAccountTypeComboBox;
+    @FXML private Button submitWithdrawButton;
+
+    //Deposit Money Pane children
+    @FXML private TextField depositAmountTextField;
+    @FXML private ComboBox depositAccountTypeComboBox;
+    @FXML private Button submitDepositButton;
+
+    //Transfer Money Pane children
+    @FXML private TextField transferAmountTextField;
+    @FXML private TextField fromTransferMoneyTextField;
+    @FXML private TextField toTransferMoneyTextField;
+    @FXML private Button submitTransferButton;
+
+    //Loan Services Pane and children
+    @FXML private Pane loanServicesPane;
+    @FXML private ListView loanCustomerAccountListView;
+    @FXML private TextField loanSearchCustomerTextField;
+    @FXML private Button loanSearchCustomerButton;
+    @FXML private Button loanSubmitButton;
+    @FXML private Button loanCancelButton;
+
 
     public LandingPageController()
     {
@@ -233,7 +275,7 @@ public class LandingPageController {
 
 
     public void displaySelectedView(Pane selectedView){
-         Pane[] arrayOfViews = {customerListPane, createNewAccountPane, modifyCustomerPane, createNewCustomerPane,selectCustomerPane, accountPane};
+         Pane[] arrayOfViews = {customerListPane, createNewAccountPane, modifyCustomerPane, createNewCustomerPane, selectCustomerPane, accountPane, moneyExchangePane, loanServicesPane};
         for (Pane p: arrayOfViews) {
             if (p != selectedView){
                 p.setVisible(false);
@@ -260,9 +302,22 @@ public class LandingPageController {
     public void selectAccountButtonClicked(MouseEvent mouseEvent) {
     }
 
-    public void loanServicesButtonClicked(MouseEvent mouseEvent) {
+    public void loanServicesButtonClicked(ActionEvent mouseEvent) {
+        searchBox.setVisible(false);
+        displaySelectedView(loanServicesPane);
     }
 
-    public void moneyExchangeButtonClicked(MouseEvent mouseEvent) {
+    public void moneyExchangeButtonClicked(ActionEvent actionEvent) {
+        searchBox.setVisible(false);
+        displaySelectedView(moneyExchangePane);
+    }
+
+    public void submitWithdrawButtonClicked(ActionEvent actionEvent) {
+    }
+
+    public void submitDepositButtonClicked(ActionEvent actionEvent) {
+    }
+
+    public void submitTransferButtonClicked(ActionEvent actionEvent) {
     }
 }
