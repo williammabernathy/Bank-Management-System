@@ -13,6 +13,9 @@ customerID INT(100) PRIMARY KEY AUTO_INCREMENT,
 customerFname VARCHAR(20),
 customerLname VARCHAR(20),
 customerAddress VARCHAR(50),
+customerCity VARCHAR(50),
+customerState VARCHAR(50),
+customerZip VARCHAR(50),
 customerPhone VARCHAR(15),
 customerBirthday DATE
 );
@@ -60,11 +63,11 @@ END;
 //
 delimiter ;
 
-INSERT INTO Customer (customerFname, customerLname, customerAddress, customerPhone, customerBirthday) VALUES('zach', 'bray', '123 main street', '555-555-5555', STR_TO_DATE('2/25/1993', '%m/%d/%Y'));
-INSERT INTO Customer (customerFname, customerLname, customerAddress, customerPhone, customerBirthday) VALUES('bereket', 'd', '123 hollywood', '555-555-5555', STR_TO_DATE('1/23/1998', '%m/%d/%Y'));
-INSERT INTO Customer (customerFname, customerLname, customerAddress, customerPhone, customerBirthday) VALUES('will', 'aber', '123 middleofnowhere', '555-555-5555', STR_TO_DATE('2/25/1993', '%m/%d/%Y'));
-INSERT INTO Customer (customerFname, customerLname, customerAddress, customerPhone, customerBirthday) VALUES('matt', 'hudson', '123 somewhere', '555-555-5555', STR_TO_DATE('3/21/1970', '%m/%d/%Y'));
-INSERT INTO Customer (customerFname, customerLname, customerAddress, customerPhone, customerBirthday) VALUES('rip', 'fl4k', '123 pandora', '555-555-5555', STR_TO_DATE('4/14/1950', '%m/%d/%Y'));
+INSERT INTO Customer (customerFname, customerLname, customerAddress, customerCity, customerState, customerZip, customerPhone, customerBirthday) VALUES('Zach', 'Bray', '123 Main Street','Irvine', 'Kentucky', '40336', '555-555-5555', STR_TO_DATE('2/25/1993', '%m/%d/%Y'));
+INSERT INTO Customer (customerFname, customerLname, customerAddress, customerCity, customerState, customerZip, customerPhone, customerBirthday) VALUES('Bereket', 'Demessie', '123 Hollywood', 'Richmond', 'Kentucky', '40475', '555-555-5555', STR_TO_DATE('1/23/1998', '%m/%d/%Y'));
+INSERT INTO Customer (customerFname, customerLname, customerAddress, customerCity, customerState, customerZip, customerPhone, customerBirthday) VALUES('Will', 'Abernathy', '123 Middleofnowhere', 'Irvine', 'Kentucky', '40336', '555-555-5555', STR_TO_DATE('2/25/1993', '%m/%d/%Y'));
+INSERT INTO Customer (customerFname, customerLname, customerAddress, customerCity, customerState, customerZip, customerPhone, customerBirthday) VALUES('Matt', 'Hudson', '123 Somewhere', 'Lexington', 'Kentucky', '40444', '555-555-5555', STR_TO_DATE('3/21/1970', '%m/%d/%Y'));
+INSERT INTO Customer (customerFname, customerLname, customerAddress, customerCity, customerState, customerZip, customerPhone, customerBirthday) VALUES('RIP', 'FL4K', '123 Pandora', 'Birmingham', 'Alabama', '12345', '555-555-5555', STR_TO_DATE('4/14/1950', '%m/%d/%Y'));
 
 INSERT INTO Customeraccounts (customerID, accountType, creationDate, amount) VALUES('1', 'C', STR_TO_DATE('4/14/1950', '%m/%d/%Y'), 1000.00);
 INSERT INTO Customeraccounts (customerID, accountType, creationDate, amount) VALUES('1', 'S', STR_TO_DATE('12/25/1850', '%m/%d/%Y'), 1000000.00);

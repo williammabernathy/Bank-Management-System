@@ -11,12 +11,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-import javax.xml.soap.Text;
+import java.time.Instant;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
-import java.util.function.UnaryOperator;
-import java.util.regex.Pattern;
 
 public class LandingPageController {
     // general/main pane elements
@@ -35,6 +34,7 @@ public class LandingPageController {
     @FXML private Pane createNewAccountPane;
     @FXML private Pane customerListPane;
     @FXML private ListView customerListView;
+    @FXML private Button mofifyButton;
 
     // create customer fields
     @FXML private Button CancelButtonClicked;
@@ -59,11 +59,6 @@ public class LandingPageController {
     @FXML private TextField accountHolderName;
     @FXML private TextField accountBalanceField;
 
-    // global variables
-    private static ObservableList<Customer> allCustomers;
-    private static ObservableList<Account> allAccounts;
-    Customer selectedCust;
-
     //modify customer pane and children
     @FXML private Pane modifyCustomerPane;
     @FXML private TextField modifiedFirstNameTextField;
@@ -74,8 +69,8 @@ public class LandingPageController {
     @FXML private TextField modifiedCityTextField;
     @FXML private TextField mofifiedStateTextField;
     @FXML private TextField modifiedZipcodeTextField;
-    @FXML private Button submitModifiedButton;
-    @FXML private Button cancelModifiedButtonClicked;
+    @FXML private Button submitModifiedCustomerButtonClicked;
+    @FXML private Button cancelModifiedCustomerButtonClicked;
 
     //Money Exchange
     @FXML private TextArea moneyExchangeTextArea;
@@ -105,6 +100,10 @@ public class LandingPageController {
     @FXML private Button loanSubmitButton;
     @FXML private Button loanCancelButton;
 
+    // global variables
+    private static ObservableList<Customer> allCustomers;
+    private static ObservableList<Account> allAccounts;
+    Customer selectedCust;
 
     public LandingPageController()
     {
@@ -114,8 +113,10 @@ public class LandingPageController {
     //all elements to be called when scene is first loaded should be here
     public void initialize()
     {
+        displaySelectedCustomer.setText("Selected Customer: ");
+
         //fill combobox in account creation pane with values
-        accountTypeField.getItems().addAll("Checking", "Savings", "Loan");
+        accountTypeField.getItems().addAll("Checking", "Savings");
 
         //disable the sidebar buttons until customer is selected
         mainAccountButton.setDisable(true);
@@ -138,6 +139,11 @@ public class LandingPageController {
     // refresh all contents of the customer listview
     public void refreshCustomerListView()
     {
+        selectedCust = null;
+
+        mofifyButton.setDisable(false);
+        displaySelectedCustomer.setText("Selected Customer: ");
+
         //clear the current items in the listview
         customerListView.getItems().clear();
 
@@ -182,12 +188,12 @@ public class LandingPageController {
     //account sidebar button
     public void accountButtonClicked(MouseEvent mouseEvent)
     {
-        searchBox.setVisible(true);
+        searchBox.setVisible(false);
         searchTextField.setPromptText("Search for an account with account number or customer ID");
         displaySelectedView(accountPane);
 
         accountCustID.setText(selectedCust.getCustID());
-        accountHolderName.setText(selectedCust.getLname() +" "+selectedCust.getFname());
+        accountHolderName.setText(selectedCust.getLname() +", "+selectedCust.getFname());
     }
 
     //customer side bar button
@@ -239,19 +245,114 @@ public class LandingPageController {
             mainLoanServices.setDisable(false);
             mainMoneyExchangeButton.setDisable(false);
             mainAccountButton.setDisable(false);
+            mofifyButton.setDisable(false);
         }
     }
 
+    /*
+    *
+    * Modify Customer Pane
+    *
+    */
     // modify customer information from customer tab
     public void modifyButtonClicked(MouseEvent mouseEvent) {
         searchBox.setVisible(false);
         displaySelectedView(modifyCustomerPane);
+
+        //convert the date to localdate
+        Date conv = selectedCust.getBirthday();
+        Instant instant = Instant.ofEpochMilli(conv.getTime());
+        LocalDateTime localDateTime = LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
+        LocalDate localDate = localDateTime.toLocalDate();
+
+        //set textfields with current customer information
+        modifiedFirstNameTextField.setText(selectedCust.getFname());
+        modifiedLastNameTextField.setText(selectedCust.getLname());
+        modifiedPhoneTextField.setText(selectedCust.getPhoneNum());
+        modifedDatePickerField.setValue(localDate);
+        modifiedAddressTextField.setText(selectedCust.getAddress());
+        modifiedCityTextField.setText(selectedCust.getCity());
+        mofifiedStateTextField.setText(selectedCust.getState());
+        modifiedZipcodeTextField.setText(selectedCust.getZip());
     }
 
-    // create a new customer from the customer tab
-    public void createNewCustomerButtonClicked(MouseEvent mouseEvent) {
-        searchBox.setVisible(false);
-        displaySelectedView(createNewCustomerPane);
+    public void submitModifiedCustomerButtonClicked(ActionEvent actionEvent)
+    {
+        // check that all input fields have a value
+        if(modifiedFirstNameTextField.getText() == null || modifiedLastNameTextField.getText() == null || modifiedPhoneTextField.getText() == null || modifedDatePickerField.getValue() == null ||
+                modifiedAddressTextField.getText() == null || modifiedCityTextField.getText() == null || mofifiedStateTextField.getText() == null || modifiedZipcodeTextField.getText() == null)
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "All fields must be entered!", ButtonType.OK);
+            alert.showAndWait();
+        }
+        else
+        {
+            // if all inputs are present, get the values to pass
+            String custID = selectedCust.getCustID();
+            String firstName = modifiedFirstNameTextField.getText();
+            String lastName = modifiedLastNameTextField.getText();
+            String phoneNum = modifiedPhoneTextField.getText();
+            LocalDate birthday = modifedDatePickerField.getValue();
+            String address = modifiedAddressTextField.getText();
+            String city = modifiedCityTextField.getText();
+            String state = mofifiedStateTextField.getText();
+            String zip = modifiedZipcodeTextField.getText();
+
+            // insert new customer into database
+            int check = Customer.modifyCustomer(custID, firstName, lastName, phoneNum, birthday, address, city, state, zip);
+
+            // if check > 1, insert was successful
+            if(check > 0)
+            {
+                // display success notification
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Customer information has been updated successfully!", ButtonType.OK);
+                alert.showAndWait();
+
+                // clear all fields
+                modifiedFirstNameTextField.clear();
+                modifiedLastNameTextField.clear();
+                modifiedPhoneTextField.clear();
+                modifedDatePickerField.setValue(null);
+                modifiedAddressTextField.clear();
+                modifiedCityTextField.clear();
+                mofifiedStateTextField.clear();
+                modifiedZipcodeTextField.clear();
+
+                //refresh list view
+                refreshCustomerListView();
+
+                //return to customer list
+                displaySelectedView(customerListPane);
+                searchBox.setVisible(true);
+            }
+            // something went wrong with insert
+            else
+            {
+                // display error message
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Something went wrong while trying to update customer information.", ButtonType.OK);
+                alert.showAndWait();
+            }
+        }
+    }
+
+    public void cancelModifiedCustomerButtonClicked(ActionEvent actionEvent)
+    {
+        // clear all fields
+        modifiedFirstNameTextField.clear();
+        modifiedLastNameTextField.clear();
+        modifiedPhoneTextField.clear();
+        modifedDatePickerField.setValue(null);
+        modifiedAddressTextField.clear();
+        modifiedCityTextField.clear();
+        mofifiedStateTextField.clear();
+        modifiedZipcodeTextField.clear();
+
+        //refresh list view
+        refreshCustomerListView();
+
+        //return to customer list
+        displaySelectedView(customerListPane);
+        searchBox.setVisible(true);
     }
 
     /*
@@ -259,6 +360,12 @@ public class LandingPageController {
     * Create Customer Pane
     *
     */
+    // create a new customer from the customer tab
+    public void createNewCustomerButtonClicked(MouseEvent mouseEvent) {
+        searchBox.setVisible(false);
+        displaySelectedView(createNewCustomerPane);
+    }
+
     // submit a newly created customer from the new/create customer tab
     public void submitNewCustomerButtonClicked(ActionEvent event)
     {
@@ -306,6 +413,7 @@ public class LandingPageController {
 
                 //return to customer list
                 displaySelectedView(customerListPane);
+                searchBox.setVisible(true);
             }
             // something went wrong with insert
             else
@@ -335,6 +443,7 @@ public class LandingPageController {
 
         //return to customer list
         displaySelectedView(customerListPane);
+        searchBox.setVisible(true);
     }
 
     public void cancelNewCustomerButtonClicked(MouseEvent mouseEvent)
@@ -403,10 +512,8 @@ public class LandingPageController {
             {
                 accountType = "C";
             }
-            else if(accountTypeField.getValue() == "Loan")
-            {
-                accountType = "L";
-            }
+
+            //get current date
             LocalDate creationDate = java.time.LocalDate.now();
             String amount = accountBalanceField.getText();
 
@@ -468,15 +575,22 @@ public class LandingPageController {
      * Money Services Pane
      *
      */
-            public void submitWithdrawButtonClicked(ActionEvent actionEvent) {
-            }
+    public void moneyExchangeButtonClicked(ActionEvent actionEvent) {
+        searchBox.setVisible(false);
+        displaySelectedView(moneyExchangePane);
+    }
 
-            public void submitDepositButtonClicked(ActionEvent actionEvent) {
-            }
+    public void submitWithdrawButtonClicked(ActionEvent actionEvent) {
 
-            public void submitTransferButtonClicked(ActionEvent actionEvent) {
+    }
 
-            }
+    public void submitDepositButtonClicked(ActionEvent actionEvent) {
+
+    }
+
+    public void submitTransferButtonClicked(ActionEvent actionEvent) {
+
+    }
 
     /*
      *
@@ -498,11 +612,7 @@ public class LandingPageController {
         }
     }
 
-    public void moneyExchangeButtonClicked(ActionEvent actionEvent) {
-        searchBox.setVisible(false);
-        displaySelectedView(moneyExchangePane);
-    }
-
     public void submitNewAccountButtonClicked(MouseEvent mouseEvent) {
+
     }
 }
