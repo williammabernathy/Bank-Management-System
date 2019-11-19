@@ -5,12 +5,14 @@ import application.custClasses.Customer;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -113,6 +115,7 @@ public class LandingPageController {
     //all elements to be called when scene is first loaded should be here
     public void initialize()
     {
+        mofifyButton.setDisable(true);
         displaySelectedCustomer.setText("Selected Customer: ");
 
         //fill combobox in account creation pane with values
@@ -140,8 +143,8 @@ public class LandingPageController {
     public void refreshCustomerListView()
     {
         selectedCust = null;
+        mofifyButton.setDisable(true);
 
-        mofifyButton.setDisable(false);
         displaySelectedCustomer.setText("Selected Customer: ");
 
         //clear the current items in the listview
@@ -361,7 +364,7 @@ public class LandingPageController {
     *
     */
     // create a new customer from the customer tab
-    public void createNewCustomerButtonClicked(MouseEvent mouseEvent) {
+    public void createNewCustomerButtonClicked(ActionEvent mouseEvent) {
         searchBox.setVisible(false);
         displaySelectedView(createNewCustomerPane);
     }
@@ -446,32 +449,16 @@ public class LandingPageController {
         searchBox.setVisible(true);
     }
 
-    public void cancelNewCustomerButtonClicked(MouseEvent mouseEvent)
-    {
-        searchBox.setVisible(true); displaySelectedView(customerListPane);
-        searchTextField.setPromptText("Search for an customer with name or customer ID");
-    }
-
-    public void submitNewCustomerButtonClicked(MouseEvent mouseEvent)
-    {
-        searchBox.setVisible(false); /*get data entered by employee and update database */
-    }
-
     /*
     *
     * Account List Pane
     *
     */
 
-    public void createNewAccountButtonClicked(MouseEvent mouseEvent)
+    public void createNewAccountButtonClicked(ActionEvent mouseEvent)
     {
         searchBox.setVisible(false);
         displaySelectedView(createNewAccountPane);
-    }
-
-    public void closeAccountButtonClicked(MouseEvent mouseEvent)
-    {
-
     }
 
     /*
@@ -570,6 +557,7 @@ public class LandingPageController {
         searchBox.setVisible(false);
         displaySelectedView(loanServicesPane);
     }
+
     /*
      *
      * Money Services Pane
@@ -610,9 +598,5 @@ public class LandingPageController {
                 p.setVisible(true);
             }
         }
-    }
-
-    public void submitNewAccountButtonClicked(MouseEvent mouseEvent) {
-
     }
 }

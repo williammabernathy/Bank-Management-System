@@ -50,6 +50,8 @@ public class LoginController
             stage.setResizable(false);
             stage.setTitle("Bank Management System");
             stage.setScene(scene);
+            useranameTextField.clear();
+            passwordTextField.clear();
             stage.show();
         }
         catch (IOException e)
