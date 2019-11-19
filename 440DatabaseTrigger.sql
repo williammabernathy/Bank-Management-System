@@ -105,7 +105,7 @@ INSERT INTO employee (employeeFname, employeeLname, employeeUsername, employeePa
 INSERT INTO transactions (senderAccountID,receiverAccountID,transactiondate,transactionAmount) VALUES(2, 1, STR_TO_DATE('8/31/1900', '%m/%d/%Y'), 100.0);
 
 INSERT INTO depositewithdraw(accountid, actiontype, dwDate, amount) VALUES(3, 'd', STR_TO_DATE('8/31/1900', '%m/%d/%Y'), 1000.0);
-INSERT INTO depositewithdraw(accountid, actiontype, dwDate, amount) VALUES(3, 'd', STR_TO_DATE('8/31/1900', '%m/%d/%Y'), -500.0);
+INSERT INTO depositewithdraw(accountid, actiontype, dwDate, amount) VALUES(3, 'w', STR_TO_DATE('8/31/1900', '%m/%d/%Y'), -500.0);
 
 
 
