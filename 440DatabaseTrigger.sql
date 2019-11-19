@@ -10,13 +10,13 @@ DROP TABLE if EXISTS Transactions;
 
 CREATE TABLE Customer(
 customerID INT(100) PRIMARY KEY AUTO_INCREMENT,
-customerFname VARCHAR(20),
-customerLname VARCHAR(20),
+customerFname VARCHAR(40),
+customerLname VARCHAR(40),
 customerAddress VARCHAR(50),
 customerCity VARCHAR(50),
 customerState VARCHAR(50),
 customerZip VARCHAR(50),
-customerPhone VARCHAR(15),
+customerPhone VARCHAR(25),
 customerBirthday DATE
 );
 	
@@ -48,6 +48,14 @@ FOREIGN KEY (senderAccountID) REFERENCES customeraccounts(accountid),
 FOREIGN KEY (receiverAccountID) REFERENCES customeraccounts(accountid)
 );
 
+CREATE TABLE depositewithdraw(
+dwID INT(100) AUTO_INCREMENT PRIMARY KEY,
+AccountID INT,
+actiontype VARCHAR(1),
+dwDate DATE,
+amount INT
+);
+
 Delimiter //
 CREATE TRIGGER updateCustomerAccountAmount
 AFTER INSERT ON transactions FOR EACH ROW 
@@ -62,6 +70,20 @@ BEGIN
 END;
 //
 delimiter ;
+
+Delimiter //
+CREATE TRIGGER updateCustomerAccountAmountAfterDorW
+AFTER INSERT ON depositewithdraw FOR EACH ROW 
+BEGIN
+	update customeraccounts
+	SET amount = amount + NEW.amount
+	WHERE accountid = NEW.AccountID;
+	
+END;
+//
+delimiter ;
+
+
 
 INSERT INTO Customer (customerFname, customerLname, customerAddress, customerCity, customerState, customerZip, customerPhone, customerBirthday) VALUES('Zach', 'Bray', '123 Main Street','Irvine', 'Kentucky', '40336', '555-555-5555', STR_TO_DATE('2/25/1993', '%m/%d/%Y'));
 INSERT INTO Customer (customerFname, customerLname, customerAddress, customerCity, customerState, customerZip, customerPhone, customerBirthday) VALUES('Bereket', 'Demessie', '123 Hollywood', 'Richmond', 'Kentucky', '40475', '555-555-5555', STR_TO_DATE('1/23/1998', '%m/%d/%Y'));
@@ -81,6 +103,9 @@ INSERT INTO employee (employeeFname, employeeLname, employeeUsername, employeePa
 INSERT INTO employee (employeeFname, employeeLname, employeeUsername, employeePassword) VALUES ('zach', 'bray', 'Zbray', PASSWORD('flawless'));
 
 INSERT INTO transactions (senderAccountID,receiverAccountID,transactiondate,transactionAmount) VALUES(2, 1, STR_TO_DATE('8/31/1900', '%m/%d/%Y'), 100.0);
+
+INSERT INTO depositewithdraw(accountid, actiontype, dwDate, amount) VALUES(3, 'd', STR_TO_DATE('8/31/1900', '%m/%d/%Y'), 1000.0);
+INSERT INTO depositewithdraw(accountid, actiontype, dwDate, amount) VALUES(3, 'd', STR_TO_DATE('8/31/1900', '%m/%d/%Y'), -500.0);
 
 
 
