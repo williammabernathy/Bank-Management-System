@@ -116,6 +116,9 @@ public class LandingPageController {
     public void initialize()
     {
         mofifyButton.setDisable(true);
+        mainAccountButton.setDisable(true);
+        mainLoanServices.setDisable(true);
+        mainMoneyExchangeButton.setDisable(true);
         displaySelectedCustomer.setText("Selected Customer: ");
 
         //fill combobox in account creation pane with values
@@ -144,6 +147,9 @@ public class LandingPageController {
     {
         selectedCust = null;
         mofifyButton.setDisable(true);
+        mainAccountButton.setDisable(true);
+        mainLoanServices.setDisable(true);
+        mainMoneyExchangeButton.setDisable(true);
 
         displaySelectedCustomer.setText("Selected Customer: ");
 

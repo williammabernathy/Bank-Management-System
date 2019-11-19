@@ -820,7 +820,7 @@
                         <Insets top="5.0" />
                      </VBox.margin>
                   </Button>
-                  <Button fx:id="selectCreateNewCustomer" defaultButton="true" mnemonicParsing="false" onMouseClicked="#createNewCustomerButtonClicked" prefHeight="30.0" prefWidth="135.0" text="Create New Customer">
+                  <Button fx:id="selectCreateNewCustomer" defaultButton="true" mnemonicParsing="false" prefHeight="30.0" prefWidth="135.0" text="Create New Customer">
                      <VBox.margin>
                         <Insets top="5.0" />
                      </VBox.margin>
