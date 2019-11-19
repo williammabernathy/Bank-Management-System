@@ -499,6 +499,7 @@ public class LandingPageController {
     }
 
     public void moneyExchangeButtonClicked(ActionEvent actionEvent) {
+        searchBox.setVisible(false);
         displaySelectedView(moneyExchangePane);
     }
 

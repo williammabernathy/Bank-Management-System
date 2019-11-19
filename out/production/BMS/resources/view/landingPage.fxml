@@ -25,129 +25,369 @@
 
 <AnchorPane minHeight="-Infinity" prefHeight="743.0" prefWidth="1251.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.LandingPageController">
    <children>
-      <Pane fx:id="createNewAccountPane" layoutX="280.0" layoutY="50.0" prefHeight="630.0" prefWidth="860.0" style="-fx-background-color: #F8F8F8;" visible="false" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="303.0" AnchorPane.topAnchor="60.0">
+      <VBox prefHeight="743.0" prefWidth="277.0" style="-fx-background-color: #96d1c7;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <ToolBar layoutY="48.0">
-               <items>
-                  <VBox prefHeight="492.0" prefWidth="843.0">
-                     <children>
-                        <Label layoutX="37.0" layoutY="354.0" text="Customer ID" AnchorPane.leftAnchor="37.0">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                           <VBox.margin>
-                              <Insets top="5.0" />
-                           </VBox.margin>
-                           <padding>
-                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                           </padding>
-                        </Label>
-                        <TextField fx:id="accountCustID" editable="false" layoutX="37.0" layoutY="385.0" prefHeight="39.0" prefWidth="844.0" AnchorPane.leftAnchor="37.0">
-                           <VBox.margin>
-                              <Insets />
-                           </VBox.margin>
-                           <padding>
-                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                           </padding>
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </TextField>
-                        <Label layoutX="37.0" layoutY="30.0" prefHeight="17.0" prefWidth="430.0" text="Type" AnchorPane.leftAnchor="37.0" AnchorPane.topAnchor="30.0">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                           <VBox.margin>
-                              <Insets top="5.0" />
-                           </VBox.margin>
-                           <padding>
-                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                           </padding>
-                        </Label>
-                        <ComboBox fx:id="accountTypeField" layoutX="37.0" layoutY="70.0" prefHeight="39.0" prefWidth="844.0" promptText="Select account type" AnchorPane.leftAnchor="37.0">
-                           <padding>
-                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                           </padding>
-                        </ComboBox>
-                        <Label layoutX="37.0" layoutY="192.0" text="Account Holder" AnchorPane.leftAnchor="37.0">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                           <VBox.margin>
-                              <Insets top="5.0" />
-                           </VBox.margin>
-                           <padding>
-                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                           </padding>
-                        </Label>
-                        <TextField fx:id="accountHolderName" editable="false" layoutX="37.0" layoutY="223.0" prefHeight="39.0" prefWidth="844.0" promptText="LastName, Firstname" AnchorPane.leftAnchor="37.0">
-                           <VBox.margin>
-                              <Insets />
-                           </VBox.margin>
-                           <padding>
-                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                           </padding>
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </TextField>
-                        <Label layoutX="37.0" layoutY="438.0" text="Opening Balance" AnchorPane.leftAnchor="37.0">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                           <VBox.margin>
-                              <Insets top="5.0" />
-                           </VBox.margin>
-                           <padding>
-                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                           </padding>
-                        </Label>
-                        <TextField fx:id="accountBalanceField" layoutX="37.0" layoutY="465.0" prefHeight="39.0" prefWidth="844.0" promptText="0.00" AnchorPane.leftAnchor="37.0">
-                           <VBox.margin>
-                              <Insets />
-                           </VBox.margin>
-                           <padding>
-                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                           </padding>
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </TextField>
-                     </children>
-                  </VBox>
-               </items>
-            </ToolBar>
-            <Label layoutY="10.0" text="Account Information">
+            <Pane prefHeight="46.0" prefWidth="313.0" style="-fx-background-color: #beebe9; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);">
+               <children>
+                  <Text layoutX="6.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bank Name goes here" wrappingWidth="224.205078125" />
+               </children>
+               <VBox.margin>
+                  <Insets left="20.0" right="20.0" top="20.0" />
+               </VBox.margin>
+            </Pane>
+            <Button fx:id="mainCustomersButton" alignment="TOP_LEFT" mnemonicParsing="false" onMouseClicked="#customersButtonClicked" prefHeight="37.0" prefWidth="200.0" style="-fx-background-color: #96d1c7;" text="Customer" textFill="WHITE">
+               <VBox.margin>
+                  <Insets left="40.0" top="8.0" />
+               </VBox.margin>
                <font>
-                  <Font size="20.0" />
-               </font></Label>
-            <Separator layoutY="32.0" prefHeight="16.0" prefWidth="442.0" />
-            <Button fx:id="submitNewAccountButton" defaultButton="true" layoutY="566.0" mnemonicParsing="false" onAction="#submitNewAccount" onMouseClicked="#submitNewAccountButtonClicked" prefHeight="37.0" prefWidth="338.0" text="Submit">
-               <padding>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </padding>
+                  <Font size="22.0" />
+               </font>
             </Button>
-            <HBox fx:id="searchBox1" layoutX="483.0" layoutY="54.0" prefHeight="40.0" prefWidth="338.0">
-               <padding>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </padding>
-            </HBox>
-            <Button fx:id="cancelNewAccountButton" defaultButton="true" layoutX="508.0" layoutY="566.0" mnemonicParsing="false" onAction="#cancelNewAccount" onMouseClicked="#submitNewAccountButtonClicked" prefHeight="37.0" prefWidth="338.0" text="Cancel">
-               <padding>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </padding>
+            <Button fx:id="mainAccountButton" alignment="TOP_LEFT" mnemonicParsing="false" onMouseClicked="#accountButtonClicked" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #96d1c7;" text="Account" textFill="WHITE">
+               <VBox.margin>
+                  <Insets left="40.0" top="8.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="22.0" />
+               </font>
             </Button>
+            <Button fx:id="mainLoanServices" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#loanServicesButtonClicked" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #96d1c7;" text="Loan Services" textFill="WHITE">
+               <VBox.margin>
+                  <Insets left="40.0" top="8.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Button>
+            <Button fx:id="mainMoneyExchangeButton" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#moneyExchangeButtonClicked" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #96d1c7;" text="Money Exchange" textFill="WHITE">
+               <VBox.margin>
+                  <Insets left="40.0" top="8.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Button>
+            <Label fx:id="displaySelectedCustomer" prefHeight="27.0" prefWidth="218.0" text="Display selected customer ">
+               <VBox.margin>
+                  <Insets left="30.0" top="350.0" />
+               </VBox.margin>
+            </Label>
          </children>
-      </Pane>
-      <Pane fx:id="accountPane" layoutX="290.0" layoutY="64.0" prefHeight="630.0" prefWidth="860.0" style="-fx-background-color: #F8F8F8;" visible="false" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="303.0" AnchorPane.topAnchor="60.0">
+      </VBox>
+      <HBox fx:id="searchBox" prefHeight="40.0" prefWidth="490.0" AnchorPane.leftAnchor="327.0" AnchorPane.topAnchor="8.0">
          <children>
-            <Button fx:id="createNewAccountButton" defaultButton="true" layoutX="45.0" layoutY="436.0" mnemonicParsing="false" onMouseClicked="#createNewAccountButtonClicked" prefHeight="25.0" prefWidth="141.0" text="Create New Account" />
-            <Button fx:id="closeAccountButton" defaultButton="true" disable="true" layoutX="193.0" layoutY="436.0" mnemonicParsing="false" onMouseClicked="#closeAccountButtonClicked" prefHeight="25.0" prefWidth="123.0" text="Close Account" />
-            <Button fx:id="selectAccountButton" defaultButton="true" disable="true" layoutX="328.0" layoutY="436.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="123.0" text="Select" />
-            <ListView fx:id="allAccountsListView" layoutX="45.0" layoutY="14.0" prefHeight="414.0" prefWidth="772.0" />
+            <TextField fx:id="searchTextField" alignment="TOP_LEFT" prefHeight="30.0" prefWidth="393.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <Button fx:id="searchTextButton" defaultButton="true" mnemonicParsing="false" onMouseClicked="#searchTextButtonClicked" prefHeight="30.0" prefWidth="78.0" text="Search">
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </Button>
+         </children>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </HBox>
+      <Button fx:id="loggedUserActorButton" layoutX="1104.0" layoutY="8.0" mnemonicParsing="false" onAction="#loggedUserActorClick" prefHeight="39.0" prefWidth="141.0" text="UserLogged" AnchorPane.rightAnchor="89.0" AnchorPane.topAnchor="8.0" />
+      <Pane fx:id="modifyCustomerPane" layoutX="290.0" layoutY="60.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="645.0" prefWidth="860.0" style="-fx-background-color: #F8F8F8;" AnchorPane.bottomAnchor="38.0" AnchorPane.leftAnchor="303.0" AnchorPane.topAnchor="60.0">
+         <children>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <ToolBar layoutX="8.0" layoutY="12.0">
+                     <items>
+                        <VBox prefHeight="370.0" prefWidth="368.0">
+                           <children>
+                              <Label text="First Name">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </padding>
+                                 <VBox.margin>
+                                    <Insets top="5.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <TextField fx:id="modifiedFirstNameTextField">
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </padding>
+                              </TextField>
+                              <Label text="Last Name">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </padding>
+                                 <VBox.margin>
+                                    <Insets top="5.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <TextField fx:id="modifiedLastNameTextField">
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </padding>
+                              </TextField>
+                              <Label text="Phone ">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </padding>
+                                 <VBox.margin>
+                                    <Insets top="5.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <TextField fx:id="modifiedPhoneTextField">
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </padding>
+                              </TextField>
+                              <Label text="Birth Date">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </padding>
+                                 <VBox.margin>
+                                    <Insets top="5.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <DatePicker fx:id="modifedDatePickerField" prefHeight="25.0" prefWidth="368.0">
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </padding>
+                              </DatePicker>
+                           </children>
+                        </VBox>
+                     </items>
+                  </ToolBar>
+                  <ToolBar layoutX="416.0" layoutY="12.0">
+                     <items>
+                        <VBox prefHeight="370.0" prefWidth="368.0">
+                           <children>
+                              <Label text="Address">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </padding>
+                              </Label>
+                              <TextField fx:id="modifiedAddressTextField">
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </padding>
+                              </TextField>
+                              <Label text="City">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </padding>
+                              </Label>
+                              <TextField fx:id="modifiedCityTextField">
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </padding>
+                              </TextField>
+                              <Label text="State">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </padding>
+                              </Label>
+                              <TextField fx:id="mofifiedStateTextField">
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </padding>
+                              </TextField>
+                              <Label text="Zip Code">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </padding>
+                              </Label>
+                              <TextField fx:id="modifiedZipcodeTextField">
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </padding>
+                              </TextField>
+                           </children>
+                        </VBox>
+                     </items>
+                  </ToolBar>
+                  <Button fx:id="submitModifiedButton" defaultButton="true" layoutX="14.0" layoutY="568.0" mnemonicParsing="false" onAction="#submitNewCustomerButtonClicked" prefHeight="30.0" prefWidth="123.0" text="Submit" />
+               </children>
+            </AnchorPane>
+            <Button fx:id="cancelModifiedButtonClicked" defaultButton="true" layoutX="161.0" layoutY="569.0" mnemonicParsing="false" onAction="#cancelNewCustomerButtonClicked" prefHeight="30.0" prefWidth="78.0" text="Cancel" />
+         </children></Pane>
+      <Pane fx:id="selectCustomerPane" layoutX="310.0" layoutY="80.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="630.0" prefWidth="860.0" style="-fx-background-color: #F8F8F8;" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="303.0" AnchorPane.topAnchor="60.0" />
+      <Pane fx:id="createNewCustomerPane" layoutX="300.0" layoutY="70.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="630.0" prefWidth="860.0" style="-fx-background-color: #F8F8F8;" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="303.0" AnchorPane.topAnchor="60.0">
+         <children>
+            <TabPane prefHeight="636.0" prefWidth="858.0" tabClosingPolicy="UNAVAILABLE">
+              <tabs>
+                <Tab text="Customer Information">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <ToolBar layoutX="8.0" layoutY="12.0">
+                                 <items>
+                                    <VBox prefHeight="370.0" prefWidth="368.0">
+                                       <children>
+                                          <Label text="First Name">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets top="5.0" />
+                                             </VBox.margin>
+                                             <padding>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </padding>
+                                          </Label>
+                                          <TextField fx:id="firstNameTextField">
+                                             <padding>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </padding>
+                                          </TextField>
+                                          <Label text="Last Name">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets top="5.0" />
+                                             </VBox.margin>
+                                             <padding>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </padding>
+                                          </Label>
+                                          <TextField fx:id="lastNameTextField">
+                                             <padding>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </padding>
+                                          </TextField>
+                                          <Label text="Phone ">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                             <padding>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </padding>
+                                             <VBox.margin>
+                                                <Insets top="5.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                          <TextField fx:id="phoneTextField">
+                                             <padding>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </padding>
+                                          </TextField>
+                                          <Label text="Birth Date">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                             <padding>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </padding>
+                                             <VBox.margin>
+                                                <Insets top="5.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                          <DatePicker fx:id="datePickerField" prefHeight="25.0" prefWidth="368.0">
+                                             <padding>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </padding>
+                                          </DatePicker>
+                                       </children>
+                                    </VBox>
+                                 </items>
+                              </ToolBar>
+                              <ToolBar layoutX="416.0" layoutY="12.0">
+                                 <items>
+                                    <VBox prefHeight="370.0" prefWidth="368.0">
+                                       <children>
+                                          <Label text="Address">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                             <padding>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </padding>
+                                          </Label>
+                                          <TextField fx:id="addressTextField">
+                                             <padding>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </padding>
+                                          </TextField>
+                                          <Label text="City">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                             <padding>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </padding>
+                                          </Label>
+                                          <TextField fx:id="cityTextField">
+                                             <padding>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </padding>
+                                          </TextField>
+                                          <Label text="State">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                             <padding>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </padding>
+                                          </Label>
+                                          <TextField fx:id="stateTextField">
+                                             <padding>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </padding>
+                                          </TextField>
+                                          <Label text="Zip Code">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                             <padding>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </padding>
+                                          </Label>
+                                          <TextField fx:id="zipcodeTextField">
+                                             <padding>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </padding>
+                                          </TextField>
+                                       </children>
+                                    </VBox>
+                                 </items>
+                              </ToolBar>
+                              <Button fx:id="submitNewCustomerButton" defaultButton="true" layoutX="14.0" layoutY="568.0" mnemonicParsing="false" onAction="#submitNewCustomerButtonClicked" prefHeight="25.0" prefWidth="78.0" text="Submit" />
+                              <Button fx:id="CancelButtonClicked" defaultButton="true" layoutX="110.0" layoutY="568.0" mnemonicParsing="false" onAction="#cancelNewCustomerButtonClicked" prefHeight="25.0" prefWidth="78.0" text="Cancel" />
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </Tab>
+              </tabs>
+            </TabPane>
          </children>
       </Pane>
-      <Pane fx:id="moneyExchangePane" layoutX="320.0" layoutY="90.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="630.0" prefWidth="860.0" style="-fx-background-color: #F8F8F8;" visible="false" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="303.0" AnchorPane.topAnchor="60.0">
+      <Pane fx:id="moneyExchangePane" layoutX="320.0" layoutY="90.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="630.0" prefWidth="860.0" style="-fx-background-color: #F8F8F8;" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="303.0" AnchorPane.topAnchor="60.0">
          <children>
             <TabPane prefHeight="636.0" prefWidth="858.0" tabClosingPolicy="UNAVAILABLE">
                <tabs>
@@ -337,228 +577,127 @@
             </TabPane>
          </children>
       </Pane>
-      <Pane fx:id="createNewCustomerPane" layoutX="300.0" layoutY="70.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="630.0" prefWidth="860.0" style="-fx-background-color: #F8F8F8;" visible="false" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="303.0" AnchorPane.topAnchor="60.0">
+      <Pane fx:id="createNewAccountPane" layoutX="280.0" layoutY="50.0" prefHeight="630.0" prefWidth="860.0" style="-fx-background-color: #F8F8F8;" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="303.0" AnchorPane.topAnchor="60.0">
          <children>
-            <TabPane prefHeight="636.0" prefWidth="858.0" tabClosingPolicy="UNAVAILABLE">
-              <tabs>
-                <Tab text="Customer Information">
-                  <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                           <children>
-                              <ToolBar layoutX="8.0" layoutY="12.0">
-                                 <items>
-                                    <VBox prefHeight="370.0" prefWidth="368.0">
-                                       <children>
-                                          <Label text="First Name">
-                                             <font>
-                                                <Font size="18.0" />
-                                             </font>
-                                             <VBox.margin>
-                                                <Insets top="5.0" />
-                                             </VBox.margin>
-                                             <padding>
-                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                             </padding>
-                                          </Label>
-                                          <TextField fx:id="firstNameTextField">
-                                             <padding>
-                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                             </padding>
-                                          </TextField>
-                                          <Label text="Last Name">
-                                             <font>
-                                                <Font size="18.0" />
-                                             </font>
-                                             <VBox.margin>
-                                                <Insets top="5.0" />
-                                             </VBox.margin>
-                                             <padding>
-                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                             </padding>
-                                          </Label>
-                                          <TextField fx:id="lastNameTextField">
-                                             <padding>
-                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                             </padding>
-                                          </TextField>
-                                          <Label text="Phone ">
-                                             <font>
-                                                <Font size="18.0" />
-                                             </font>
-                                             <padding>
-                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                             </padding>
-                                             <VBox.margin>
-                                                <Insets top="5.0" />
-                                             </VBox.margin>
-                                          </Label>
-                                          <TextField fx:id="phoneTextField">
-                                             <padding>
-                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                             </padding>
-                                          </TextField>
-                                          <Label text="Birth Date">
-                                             <font>
-                                                <Font size="18.0" />
-                                             </font>
-                                             <padding>
-                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                             </padding>
-                                             <VBox.margin>
-                                                <Insets top="5.0" />
-                                             </VBox.margin>
-                                          </Label>
-                                          <DatePicker fx:id="datePickerField" prefHeight="25.0" prefWidth="368.0">
-                                             <padding>
-                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                             </padding>
-                                          </DatePicker>
-                                       </children>
-                                    </VBox>
-                                 </items>
-                              </ToolBar>
-                              <ToolBar layoutX="416.0" layoutY="12.0">
-                                 <items>
-                                    <VBox prefHeight="370.0" prefWidth="368.0">
-                                       <children>
-                                          <Label text="Address">
-                                             <font>
-                                                <Font size="18.0" />
-                                             </font>
-                                             <padding>
-                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                             </padding>
-                                          </Label>
-                                          <TextField fx:id="addressTextField">
-                                             <padding>
-                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                             </padding>
-                                          </TextField>
-                                          <Label text="City">
-                                             <font>
-                                                <Font size="18.0" />
-                                             </font>
-                                             <padding>
-                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                             </padding>
-                                          </Label>
-                                          <TextField fx:id="cityTextField">
-                                             <padding>
-                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                             </padding>
-                                          </TextField>
-                                          <Label text="State">
-                                             <font>
-                                                <Font size="18.0" />
-                                             </font>
-                                             <padding>
-                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                             </padding>
-                                          </Label>
-                                          <TextField fx:id="stateTextField">
-                                             <padding>
-                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                             </padding>
-                                          </TextField>
-                                          <Label text="Zip Code">
-                                             <font>
-                                                <Font size="18.0" />
-                                             </font>
-                                             <padding>
-                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                             </padding>
-                                          </Label>
-                                          <TextField fx:id="zipcodeTextField">
-                                             <padding>
-                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                             </padding>
-                                          </TextField>
-                                       </children>
-                                    </VBox>
-                                 </items>
-                              </ToolBar>
-                              <Button fx:id="submitNewCustomerButton" defaultButton="true" layoutX="14.0" layoutY="568.0" mnemonicParsing="false" onAction="#submitNewCustomerButtonClicked" prefHeight="25.0" prefWidth="78.0" text="Submit" />
-                              <Button fx:id="CancelButtonClicked" defaultButton="true" layoutX="110.0" layoutY="568.0" mnemonicParsing="false" onAction="#cancelNewCustomerButtonClicked" prefHeight="25.0" prefWidth="78.0" text="Cancel" />
-                           </children>
-                        </AnchorPane>
-                  </content>
-                </Tab>
-              </tabs>
-            </TabPane>
-         </children>
-      </Pane>
-      <VBox prefHeight="743.0" prefWidth="277.0" style="-fx-background-color: #96d1c7;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <Pane prefHeight="46.0" prefWidth="313.0" style="-fx-background-color: #beebe9; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);">
-               <children>
-                  <Text layoutX="6.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bank Name goes here" wrappingWidth="224.205078125" />
-               </children>
-               <VBox.margin>
-                  <Insets left="20.0" right="20.0" top="20.0" />
-               </VBox.margin>
-            </Pane>
-            <Button fx:id="mainCustomersButton" alignment="TOP_LEFT" mnemonicParsing="false" onMouseClicked="#customersButtonClicked" prefHeight="37.0" prefWidth="200.0" style="-fx-background-color: #96d1c7;" text="Customer" textFill="WHITE">
-               <VBox.margin>
-                  <Insets left="40.0" top="8.0" />
-               </VBox.margin>
+            <ToolBar layoutY="48.0">
+               <items>
+                  <VBox prefHeight="492.0" prefWidth="843.0">
+                     <children>
+                        <Label layoutX="37.0" layoutY="354.0" text="Customer ID" AnchorPane.leftAnchor="37.0">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets top="5.0" />
+                           </VBox.margin>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                        </Label>
+                        <TextField fx:id="accountCustID" editable="false" layoutX="37.0" layoutY="385.0" prefHeight="39.0" prefWidth="844.0" AnchorPane.leftAnchor="37.0">
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </TextField>
+                        <Label layoutX="37.0" layoutY="30.0" prefHeight="17.0" prefWidth="430.0" text="Type" AnchorPane.leftAnchor="37.0" AnchorPane.topAnchor="30.0">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets top="5.0" />
+                           </VBox.margin>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                        </Label>
+                        <ComboBox fx:id="accountTypeField" layoutX="37.0" layoutY="70.0" prefHeight="39.0" prefWidth="844.0" promptText="Select account type" AnchorPane.leftAnchor="37.0">
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                        </ComboBox>
+                        <Label layoutX="37.0" layoutY="192.0" text="Account Holder" AnchorPane.leftAnchor="37.0">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets top="5.0" />
+                           </VBox.margin>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                        </Label>
+                        <TextField fx:id="accountHolderName" editable="false" layoutX="37.0" layoutY="223.0" prefHeight="39.0" prefWidth="844.0" promptText="LastName, Firstname" AnchorPane.leftAnchor="37.0">
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </TextField>
+                        <Label layoutX="37.0" layoutY="438.0" text="Opening Balance" AnchorPane.leftAnchor="37.0">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets top="5.0" />
+                           </VBox.margin>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                        </Label>
+                        <TextField fx:id="accountBalanceField" layoutX="37.0" layoutY="465.0" prefHeight="39.0" prefWidth="844.0" promptText="0.00" AnchorPane.leftAnchor="37.0">
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </TextField>
+                     </children>
+                  </VBox>
+               </items>
+            </ToolBar>
+            <Label layoutY="10.0" text="Account Information">
                <font>
-                  <Font size="22.0" />
-               </font>
+                  <Font size="20.0" />
+               </font></Label>
+            <Separator layoutY="32.0" prefHeight="16.0" prefWidth="442.0" />
+            <Button fx:id="submitNewAccountButton" defaultButton="true" layoutY="566.0" mnemonicParsing="false" onAction="#submitNewAccount" onMouseClicked="#submitNewAccountButtonClicked" prefHeight="37.0" prefWidth="338.0" text="Submit">
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
             </Button>
-            <Button fx:id="mainAccountButton" alignment="TOP_LEFT" mnemonicParsing="false" onMouseClicked="#accountButtonClicked" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #96d1c7;" text="Account" textFill="WHITE">
-               <VBox.margin>
-                  <Insets left="40.0" top="8.0" />
-               </VBox.margin>
-               <font>
-                  <Font size="22.0" />
-               </font>
-            </Button>
-            <Button fx:id="mainLoanServices" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#loanServicesButtonClicked" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #96d1c7;" text="Loan Services" textFill="WHITE">
-               <VBox.margin>
-                  <Insets left="40.0" top="8.0" />
-               </VBox.margin>
-               <font>
-                  <Font size="22.0" />
-               </font>
-            </Button>
-            <Button fx:id="mainMoneyExchangeButton" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#moneyExchangeButtonClicked" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #96d1c7;" text="Money Exchange" textFill="WHITE">
-               <VBox.margin>
-                  <Insets left="40.0" top="8.0" />
-               </VBox.margin>
-               <font>
-                  <Font size="22.0" />
-               </font>
-            </Button>
-            <Label fx:id="displaySelectedCustomer" prefHeight="27.0" prefWidth="218.0" text="Display selected customer ">
-               <VBox.margin>
-                  <Insets left="30.0" top="350.0" />
-               </VBox.margin>
-            </Label>
-         </children>
-      </VBox>
-      <HBox fx:id="searchBox" prefHeight="40.0" prefWidth="490.0" AnchorPane.leftAnchor="327.0" AnchorPane.topAnchor="8.0">
-         <children>
-            <TextField fx:id="searchTextField" alignment="TOP_LEFT" prefHeight="30.0" prefWidth="393.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </TextField>
-            <Button fx:id="searchTextButton" defaultButton="true" mnemonicParsing="false" onMouseClicked="#searchTextButtonClicked" prefHeight="30.0" prefWidth="78.0" text="Search">
-               <HBox.margin>
-                  <Insets left="10.0" />
-               </HBox.margin>
+            <HBox fx:id="searchBox1" layoutX="483.0" layoutY="54.0" prefHeight="40.0" prefWidth="338.0">
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </HBox>
+            <Button fx:id="cancelNewAccountButton" defaultButton="true" layoutX="508.0" layoutY="566.0" mnemonicParsing="false" onAction="#cancelNewAccount" onMouseClicked="#submitNewAccountButtonClicked" prefHeight="37.0" prefWidth="338.0" text="Cancel">
                <padding>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </padding>
             </Button>
          </children>
-         <padding>
-            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-         </padding>
-      </HBox>
-      <Button fx:id="loggedUserActorButton" layoutX="1104.0" layoutY="8.0" mnemonicParsing="false" onAction="#loggedUserActorClick" prefHeight="39.0" prefWidth="224.0" text="loggedUName" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="8.0" />
-      <Pane fx:id="selectCustomerPane" layoutX="310.0" layoutY="80.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="630.0" prefWidth="860.0" style="-fx-background-color: #F8F8F8;" visible="false" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="303.0" AnchorPane.topAnchor="60.0" />
-      <Pane fx:id="loanServicesPane" layoutX="290.0" layoutY="64.0" prefHeight="630.0" prefWidth="860.0" style="-fx-background-color: #F8F8F8;" visible="false" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="303.0" AnchorPane.topAnchor="60.0">
+      </Pane>
+      <Pane fx:id="accountPane" layoutX="290.0" layoutY="64.0" prefHeight="630.0" prefWidth="860.0" style="-fx-background-color: #F8F8F8;" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="303.0" AnchorPane.topAnchor="60.0">
+         <children>
+            <Button fx:id="createNewAccountButton" defaultButton="true" layoutX="45.0" layoutY="436.0" mnemonicParsing="false" onMouseClicked="#createNewAccountButtonClicked" prefHeight="25.0" prefWidth="141.0" text="Create New Account" />
+            <ListView fx:id="allAccountsListView" layoutX="45.0" layoutY="14.0" prefHeight="414.0" prefWidth="772.0" />
+         </children>
+      </Pane>
+      <Pane fx:id="loanServicesPane" layoutX="290.0" layoutY="64.0" prefHeight="630.0" prefWidth="860.0" style="-fx-background-color: #F8F8F8;" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="303.0" AnchorPane.topAnchor="60.0">
          <children>
             <Label layoutX="14.0" layoutY="13.0" text="Loan Services">
                <font>
@@ -568,7 +707,7 @@
             <Separator layoutX="14.0" layoutY="43.0" prefHeight="16.0" prefWidth="442.0" />
             <ToolBar layoutY="53.0">
                <items>
-                  <VBox prefHeight="492.0" prefWidth="430.0">
+                  <VBox prefHeight="492.0" prefWidth="770.0">
                      <children>
                         <Label layoutX="37.0" layoutY="354.0" text="Customer ID" AnchorPane.leftAnchor="37.0">
                            <font>
@@ -581,7 +720,7 @@
                               <Insets top="5.0" />
                            </VBox.margin>
                         </Label>
-                        <TextField fx:id="loanCustomerIDTextField" editable="false" layoutX="37.0" layoutY="385.0" prefHeight="39.0" prefWidth="844.0" AnchorPane.leftAnchor="37.0">
+                        <TextField fx:id="loanCustomerIDTextField" layoutX="37.0" layoutY="385.0" prefHeight="39.0" prefWidth="844.0" AnchorPane.leftAnchor="37.0">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -603,11 +742,14 @@
                               <Insets top="5.0" />
                            </VBox.margin>
                         </Label>
-                        <ComboBox fx:id="loanAccountTypeTextField" layoutX="37.0" layoutY="70.0" prefHeight="42.0" prefWidth="430.0" promptText="Select account type" AnchorPane.leftAnchor="37.0">
+                        <TextField fx:id="loanCustomerIDTextField1" editable="false" prefHeight="39.0" prefWidth="844.0" text="Loan">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
                            <padding>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </padding>
-                        </ComboBox>
+                        </TextField>
                         <Label layoutX="37.0" layoutY="192.0" text="Account Holder" AnchorPane.leftAnchor="37.0">
                            <font>
                               <Font size="18.0" />
@@ -620,28 +762,6 @@
                            </VBox.margin>
                         </Label>
                         <TextField fx:id="loanAccountHolderTextField" layoutX="37.0" layoutY="223.0" prefHeight="39.0" prefWidth="844.0" promptText="LastName, Firstname" AnchorPane.leftAnchor="37.0">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                           <padding>
-                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                           </padding>
-                           <VBox.margin>
-                              <Insets />
-                           </VBox.margin>
-                        </TextField>
-                        <Label layoutX="37.0" layoutY="276.0" text="Account Number" AnchorPane.leftAnchor="37.0">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                           <padding>
-                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                           </padding>
-                           <VBox.margin>
-                              <Insets top="5.0" />
-                           </VBox.margin>
-                        </Label>
-                        <TextField fx:id="loanAccountNumberTextField" layoutX="37.0" layoutY="307.0" prefHeight="39.0" prefWidth="844.0" AnchorPane.leftAnchor="37.0">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -678,180 +798,23 @@
                   </VBox>
                </items>
             </ToolBar>
-            <ListView fx:id="loanCustomerAccountListView" layoutX="507.0" layoutY="76.0" prefHeight="251.0" prefWidth="322.0" />
             <HBox fx:id="searchBox11" layoutX="507.0" layoutY="29.0" prefHeight="40.0" prefWidth="338.0">
-               <children>
-                  <TextField fx:id="loanSearchCustomerTextField" alignment="TOP_LEFT" prefHeight="30.0" prefWidth="228.0" promptText="Search for a customer" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </TextField>
-                  <Button fx:id="loanSearchCustomerButton" defaultButton="true" mnemonicParsing="false" onMouseClicked="#searchTextButtonClicked" prefHeight="30.0" prefWidth="78.0" text="Search">
-                     <padding>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </padding>
-                     <HBox.margin>
-                        <Insets left="10.0" />
-                     </HBox.margin>
-                  </Button>
-               </children>
                <padding>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </padding>
             </HBox>
-            <Button fx:id="loanSubmitButton" defaultButton="true" layoutY="567.0" mnemonicParsing="false" onMouseClicked="#searchTextButtonClicked" prefHeight="37.0" prefWidth="154.0" text="Submit">
+            <Button fx:id="loanSubmitButton" defaultButton="true" layoutY="567.0" mnemonicParsing="false" onMouseClicked="#searchTextButtonClicked" prefHeight="37.0" prefWidth="328.0" text="Submit">
                <padding>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </padding>
             </Button>
-            <Button fx:id="loanCancelButton" defaultButton="true" layoutX="192.0" layoutY="567.0" mnemonicParsing="false" onMouseClicked="#searchTextButtonClicked" prefHeight="37.0" prefWidth="154.0" text="Cancel">
+            <Button fx:id="loanCancelButton" defaultButton="true" layoutX="460.0" layoutY="567.0" mnemonicParsing="false" onMouseClicked="#searchTextButtonClicked" prefHeight="37.0" prefWidth="328.0" text="Cancel">
                <padding>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </padding>
             </Button>
          </children>
       </Pane>
-      <Pane fx:id="modifyCustomerPane" layoutX="290.0" layoutY="60.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="630.0" prefWidth="860.0" style="-fx-background-color: #F8F8F8;" visible="false" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="303.0" AnchorPane.topAnchor="60.0">
-         <children>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-               <children>
-                  <ToolBar layoutX="8.0" layoutY="12.0">
-                     <items>
-                        <VBox prefHeight="370.0" prefWidth="368.0">
-                           <children>
-                              <Label text="First Name">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                                 <padding>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </padding>
-                                 <VBox.margin>
-                                    <Insets top="5.0" />
-                                 </VBox.margin>
-                              </Label>
-                              <TextField fx:id="modifiedFirstNameTextField">
-                                 <padding>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </padding>
-                              </TextField>
-                              <Label text="Last Name">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                                 <padding>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </padding>
-                                 <VBox.margin>
-                                    <Insets top="5.0" />
-                                 </VBox.margin>
-                              </Label>
-                              <TextField fx:id="modifiedLastNameTextField">
-                                 <padding>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </padding>
-                              </TextField>
-                              <Label text="Phone ">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                                 <padding>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </padding>
-                                 <VBox.margin>
-                                    <Insets top="5.0" />
-                                 </VBox.margin>
-                              </Label>
-                              <TextField fx:id="modifiedPhoneTextField">
-                                 <padding>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </padding>
-                              </TextField>
-                              <Label text="Birth Date">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                                 <padding>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </padding>
-                                 <VBox.margin>
-                                    <Insets top="5.0" />
-                                 </VBox.margin>
-                              </Label>
-                              <DatePicker fx:id="modifedDatePickerField" prefHeight="25.0" prefWidth="368.0">
-                                 <padding>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </padding>
-                              </DatePicker>
-                           </children>
-                        </VBox>
-                     </items>
-                  </ToolBar>
-                  <ToolBar layoutX="416.0" layoutY="12.0">
-                     <items>
-                        <VBox prefHeight="370.0" prefWidth="368.0">
-                           <children>
-                              <Label text="Address">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                                 <padding>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </padding>
-                              </Label>
-                              <TextField fx:id="modifiedAddressTextField">
-                                 <padding>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </padding>
-                              </TextField>
-                              <Label text="City">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                                 <padding>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </padding>
-                              </Label>
-                              <TextField fx:id="modifiedCityTextField">
-                                 <padding>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </padding>
-                              </TextField>
-                              <Label text="State">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                                 <padding>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </padding>
-                              </Label>
-                              <TextField fx:id="mofifiedStateTextField">
-                                 <padding>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </padding>
-                              </TextField>
-                              <Label text="Zip Code">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                                 <padding>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </padding>
-                              </Label>
-                              <TextField fx:id="modifiedZipcodeTextField">
-                                 <padding>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </padding>
-                              </TextField>
-                           </children>
-                        </VBox>
-                     </items>
-                  </ToolBar>
-                  <Button fx:id="submitModifiedButton" defaultButton="true" layoutX="14.0" layoutY="568.0" mnemonicParsing="false" onAction="#submitNewCustomerButtonClicked" prefHeight="30.0" prefWidth="123.0" text="Submit" />
-               </children>
-            </AnchorPane>
-            <Button fx:id="cancelModifiedButtonClicked" defaultButton="true" layoutX="161.0" layoutY="569.0" mnemonicParsing="false" onAction="#cancelNewCustomerButtonClicked" prefHeight="30.0" prefWidth="78.0" text="Cancel" />
-         </children></Pane>
       <Pane fx:id="customerListPane" layoutX="280.0" layoutY="54.0" prefHeight="630.0" prefWidth="860.0" style="-fx-background-color: #F8F8F8;" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="303.0" AnchorPane.topAnchor="60.0">
          <children>
             <VBox layoutX="543.0" layoutY="99.0" prefHeight="90.0" prefWidth="135.0">
