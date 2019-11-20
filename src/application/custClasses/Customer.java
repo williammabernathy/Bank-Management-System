@@ -232,4 +232,42 @@ public class Customer
 
         return count;
     }
+
+    public static ObservableList<Customer> searchCustomer(String searchTerm)
+    {
+        connection = ConnectDB.setupConnection();
+        ObservableList<Customer> searchedCustomers = FXCollections.observableArrayList();
+
+        try
+        {
+            String query = "SELECT * FROM Customer WHERE customerFname LIKE '%"+searchTerm+"%' OR customerLname LIKE '%"+searchTerm+"%';";
+            Statement st = connection.createStatement();
+            ResultSet rs = st.executeQuery(query);
+
+            while(rs.next())
+            {
+                String custID = rs.getString("customerID");
+                String Fname = rs.getString("customerFname");
+                String Lname = rs.getString("customerLname");
+                String address = rs.getString("customerAddress");
+                String city = rs.getString("customerCity");
+                String state = rs.getString("customerState");
+                String zip = rs.getString("customerZip");
+                String phoneNum = rs.getString("customerPhone");
+                Date birthday = rs.getDate("customerBirthday");
+
+                Customer cust = new Customer(custID, Fname, Lname, address, city, state, zip, phoneNum, birthday);
+
+                searchedCustomers.add(cust);
+            }
+            st.close();
+        }
+        catch(Exception e)
+        {
+            Logger logger = Logger.getLogger(Employee.class.getName());
+            logger.log(Level.SEVERE, "Failed to connect to database:", e);
+        }
+
+        return searchedCustomers;
+    }
 }

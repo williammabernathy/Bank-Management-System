@@ -104,6 +104,7 @@ public class LandingPageController {
 
     // global variables
     private static ObservableList<Customer> allCustomers;
+    private static ObservableList<Customer> searchedCustomers;
     private static ObservableList<Account> allAccounts;
     Customer selectedCust;
 
@@ -213,9 +214,20 @@ public class LandingPageController {
         searchBox.setVisible(true);
     }
 
-    public void searchTextButtonClicked(MouseEvent mouseEvent)
+    public void searchTextButtonClicked(ActionEvent mouseEvent)
     {
-        selectAccountButton.setDisable(false);
+        String searchQuery = searchTextField.getText();
+
+        searchedCustomers = Customer.searchCustomer(searchQuery);
+
+        //clear the current items in the listview
+        customerListView.getItems().clear();
+
+        //set the customer listview selection type to only allow a single customer to be selected
+        customerListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+
+        //fill the listview with all customers
+        customerListView.getItems().addAll(searchedCustomers);
     }
 
     /*

@@ -636,12 +636,12 @@
       </VBox>
       <HBox fx:id="searchBox" prefHeight="40.0" prefWidth="490.0" AnchorPane.leftAnchor="327.0" AnchorPane.topAnchor="8.0">
          <children>
-            <TextField fx:id="searchTextField" alignment="TOP_LEFT" prefHeight="30.0" prefWidth="393.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);">
+            <TextField fx:id="searchTextField" alignment="TOP_LEFT" prefHeight="30.0" prefWidth="393.0" promptText="Search customer by first or last name.." style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);">
                <font>
                   <Font size="14.0" />
                </font>
             </TextField>
-            <Button fx:id="searchTextButton" defaultButton="true" mnemonicParsing="false" onMouseClicked="#searchTextButtonClicked" prefHeight="30.0" prefWidth="78.0" text="Search">
+            <Button fx:id="searchTextButton" defaultButton="true" mnemonicParsing="false" onAction="#searchTextButtonClicked" prefHeight="30.0" prefWidth="78.0" text="Search">
                <HBox.margin>
                   <Insets left="10.0" />
                </HBox.margin>
