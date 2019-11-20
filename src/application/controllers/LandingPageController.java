@@ -586,7 +586,8 @@ public class LandingPageController {
     public void popCustName(){
         loanAccountHolderTextField.setText(selectedCust.getLname() + ", " + selectedCust.getFname());
     }
-    public void newLoanSumbit(){
+    //TODO***************************
+    public void newLoanSumbit(ActionEvent actionEvent){
         String custID = loanCustomerIDTextField.getText();
         String loanAmount = loanAmountTextField.getText();
         if(validateCustID(custID) && validateAmount(loanAmount)){
@@ -635,6 +636,9 @@ public class LandingPageController {
             return false;
         }
         return true;
+    }
+    public void loanCancel(ActionEvent actionEvent){
+        loanAmountTextField.clear();
     }
 
 
