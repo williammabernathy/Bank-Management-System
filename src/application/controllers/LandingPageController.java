@@ -2,6 +2,7 @@ package application.controllers;
 
 import application.custClasses.Account;
 import application.custClasses.Customer;
+import application.custClasses.Deposit;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -657,6 +658,7 @@ public class LandingPageController {
     }
 
     public void submitDepositButtonClicked(ActionEvent actionEvent) {
+        Deposit newDeposit = new Deposit()
 
     }
 
