@@ -12,6 +12,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -97,7 +98,9 @@ public class LandingPageController {
     //Loan Services Pane and children
     @FXML private Pane loanServicesPane;
     @FXML private ListView loanCustomerAccountListView;
-    @FXML private TextField loanSearchCustomerTextField;
+    @FXML private TextField loanCustomerIDTextField;
+    @FXML private TextField loanAccountHolderTextField;
+    @FXML private TextField loanAmountTextField;
     @FXML private Button loanSearchCustomerButton;
     @FXML private Button loanSubmitButton;
     @FXML private Button loanCancelButton;
@@ -569,12 +572,71 @@ public class LandingPageController {
     /*
     *
     * Loan Services Pane
-    *
+    * Zach
     */
     public void loanServicesButtonClicked(ActionEvent mouseEvent) {
         searchBox.setVisible(false);
         displaySelectedView(loanServicesPane);
+        popCustIDfield();
+        popCustName();
     }
+    public void popCustIDfield(){
+        loanCustomerIDTextField.setText(selectedCust.getCustID());
+    }
+    public void popCustName(){
+        loanAccountHolderTextField.setText(selectedCust.getLname() + ", " + selectedCust.getFname());
+    }
+    public void newLoanSumbit(){
+        String custID = loanCustomerIDTextField.getText();
+        String loanAmount = loanAmountTextField.getText();
+        if(validateCustID(custID) && validateAmount(loanAmount)){
+            enterLoanToDB(custID, loanAmount);
+        }
+    }
+
+    private void enterLoanToDB(String customerID, String amount) {
+        //get current date
+        LocalDate creationDate = java.time.LocalDate.now();
+        amount = "-" + amount;
+
+        //query database with entered information
+        int check = Account.createNewAccount(customerID, "L", creationDate, amount);
+        if (check > 0){
+            // display success notification
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "New Account created!", ButtonType.OK);
+            alert.showAndWait();
+            loanAmountTextField.clear();
+        }
+    }
+
+    private boolean validateCustID(String custID) {
+        try {
+            Double.parseDouble(custID);
+        }
+        catch (NumberFormatException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "ID must be a number!", ButtonType.OK);
+            alert.showAndWait();
+            return false;
+        }
+        return true;
+    }
+    private boolean validateAmount(String amount) {
+        try {
+             Double.parseDouble(amount);
+        }
+        catch (NumberFormatException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Amount must be a number!", ButtonType.OK);
+            alert.showAndWait();
+            return false;
+        }
+        if (Double.parseDouble(amount) < 0){
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Amount must be a greater than 0!", ButtonType.OK);
+            alert.showAndWait();
+            return false;
+        }
+        return true;
+    }
+
 
     /*
      *

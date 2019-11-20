@@ -101,6 +101,7 @@ INSERT INTO Customeraccounts (customerID, accountType, creationDate, amount) VAL
 INSERT INTO employee (employeeFname, employeeLname, employeeUsername, employeePassword) VALUES ('fname', 'lname', 'username', PASSWORD('password'));
 INSERT INTO employee (employeeFname, employeeLname, employeeUsername, employeePassword) VALUES ('zach', 'brey', 'Zbrey', PASSWORD('flawed'));
 INSERT INTO employee (employeeFname, employeeLname, employeeUsername, employeePassword) VALUES ('zach', 'bray', 'Zbray', PASSWORD('flawless'));
+INSERT INTO employee (employeeFname, employeeLname, employeeUsername, employeePassword) VALUES ('im', 'lazy', '', PASSWORD(''));
 
 INSERT INTO transactions (senderAccountID,receiverAccountID,transactiondate,transactionAmount) VALUES(2, 1, STR_TO_DATE('8/31/1900', '%m/%d/%Y'), 100.0);
 
