@@ -6,7 +6,7 @@ USE BankManagementSystem;
 DROP TABLE if EXISTS Customer;
 DROP TABLE if EXISTS CustomerAccounts;
 DROP TABLE if EXISTS Employee;
-DROP TABLE if EXISTS Transactions;
+DROP TABLE if EXISTS Transfer;
 
 CREATE TABLE Customer(
 customerID INT(100) PRIMARY KEY AUTO_INCREMENT,
@@ -38,12 +38,12 @@ employeeUsername VARCHAR(20),
 employeePassword CHAR(60)
 );
 
-CREATE TABLE Transactions(
+CREATE TABLE Transfer(
 transactionID INT(100) AUTO_INCREMENT PRIMARY KEY,
 senderAccountID INT,
 receiverAccountID INT,
-transactiondate DATE,
-transactionAmount DOUBLE,
+transferdate DATE,
+transferAmount DOUBLE,
 FOREIGN KEY (senderAccountID) REFERENCES customeraccounts(accountid),
 FOREIGN KEY (receiverAccountID) REFERENCES customeraccounts(accountid)
 );
@@ -58,13 +58,13 @@ amount INT
 
 Delimiter //
 CREATE TRIGGER updateCustomerAccountAmount
-AFTER INSERT ON transactions FOR EACH ROW 
+AFTER INSERT ON Transfer FOR EACH ROW 
 BEGIN
 	update customeraccounts
-	SET amount = amount + NEW.transactionAmount
+	SET amount = amount + NEW.transferAmount
 	WHERE accountid = NEW.receiverAccountID;
 	UPDATE customeraccounts
-	SET amount = amount - NEW.transactionAmount
+	SET amount = amount - NEW.transferAmount
 	WHERE accountid = NEW.senderAccountID;
 	
 END;
@@ -103,11 +103,10 @@ INSERT INTO employee (employeeFname, employeeLname, employeeUsername, employeePa
 INSERT INTO employee (employeeFname, employeeLname, employeeUsername, employeePassword) VALUES ('zach', 'bray', 'Zbray', PASSWORD('flawless'));
 INSERT INTO employee (employeeFname, employeeLname, employeeUsername, employeePassword) VALUES ('im', 'lazy', '', PASSWORD(''));
 
-INSERT INTO transactions (senderAccountID,receiverAccountID,transactiondate,transactionAmount) VALUES(2, 1, STR_TO_DATE('8/31/1900', '%m/%d/%Y'), 100.0);
+INSERT INTO Transfer (senderAccountID,receiverAccountID,transferdate,transferAmount) VALUES(2, 1, STR_TO_DATE('8/31/1900', '%m/%d/%Y'), 100.0);
 
 INSERT INTO depositewithdraw(accountid, actiontype, dwDate, amount) VALUES(3, 'd', STR_TO_DATE('8/31/1900', '%m/%d/%Y'), 1000.0);
 INSERT INTO depositewithdraw(accountid, actiontype, dwDate, amount) VALUES(3, 'w', STR_TO_DATE('8/31/1900', '%m/%d/%Y'), -500.0);
-
 
 
 
