@@ -636,12 +636,16 @@ public class LandingPageController {
         moneyExchangeTextAreaDeposit.setText(String.format("No Account Selected"));
     }
 
+    //// withdraw
+
     public void submitWithdrawButtonClicked(ActionEvent actionEvent) {
 
     }
 
+    ////deposit
+
     public void updateDepositTextArea(Account selectedAccount, Customer selectedCustomer){
-        moneyExchangeTextAreaDeposit.setText(String.format("Customer %s has a total\n" + "of $%f in his %s account",selectedCustomer.getFname(), selectedAccount.getAccAmount(), selectedAccount.getAccType()));
+        moneyExchangeTextAreaDeposit.setText(String.format("Customer %s has a total\n" + "of $%.2f in his %s account",selectedCustomer.getFname(), selectedAccount.getAccAmount(), selectedAccount.getAccType()));
     }
     public void depositComboBoxChange(){
         if(depositAccountTypeComboBox.getValue() != null) {
@@ -655,7 +659,7 @@ public class LandingPageController {
     }
 
     public void submitDepositButtonClicked(ActionEvent actionEvent) {
-        if(validateAmount(depositAmountTextField.getText())){
+        if(validateAmount(depositAmountTextField.getText()) && depositAccountTypeComboBox.getValue() != null){
             LocalDate creationDate = java.time.LocalDate.now();
             Account selectedAccount = (Account) depositAccountTypeComboBox.getValue();
             int check = Deposit.createNewDeposit(selectedAccount.getAccID(), creationDate, depositAmountTextField.getText());
@@ -665,6 +669,8 @@ public class LandingPageController {
             }
         }
     }
+
+    ////transfer
 
     public void submitTransferButtonClicked(ActionEvent actionEvent) {
 
