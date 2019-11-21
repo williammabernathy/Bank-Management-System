@@ -3,6 +3,7 @@ package application.controllers;
 import application.custClasses.Account;
 import application.custClasses.Customer;
 import application.custClasses.DepositWithdraw;
+import application.custClasses.Transfer;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -654,7 +655,7 @@ public class LandingPageController {
             LocalDate creationDate = java.time.LocalDate.now();
             Account selectedAccount = (Account) withdrawAccountTypeComboBox.getValue();
             int check = DepositWithdraw.createNewDWEntry(selectedAccount.getAccID(), creationDate, withdrawAmountTextField.getText(), 'w');
-            if(successfulDeposit(check)){
+            if(successfulWithdraw(check)){
                 refreshAccountListView();
                 refreshWithdrawCB();
                 refreshDepositCB();
@@ -694,7 +695,30 @@ public class LandingPageController {
     ////transfer
 
     public void submitTransferButtonClicked(ActionEvent actionEvent) {
-
+        String amount = transferAmountTextField.getText();
+        validateAmount(amount);
+        String from = fromTransferMoneyTextField.getText();
+        String to = toTransferMoneyTextField.getText();
+        if(!from.equals(to)){
+            if(validateAccountIDformat(from) &&validateAccountIDformat(to)){
+                LocalDate creationDate = java.time.LocalDate.now();
+                int check = Transfer.newTransfer(from, to, creationDate, amount);
+                if (successfulTransfer(check)){
+                    refreshAccountListView();
+                    refreshDepositCB();
+                    refreshWithdrawCB();
+                    clearTransferFields();
+                }
+            }
+        }else{
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "To and From account can not be the same!", ButtonType.OK);
+            alert.showAndWait();
+        }
+    }
+    private void clearTransferFields(){
+        transferAmountTextField.clear();
+        fromTransferMoneyTextField.clear();
+        toTransferMoneyTextField.clear();
     }
 
     /*
@@ -732,10 +756,47 @@ public class LandingPageController {
         }
         return true;
     }
+    private boolean validateAccountIDformat(String id){
+        try {
+            Integer.parseInt(id);
+            if (Integer.parseInt(id) < 0){
+                Alert alert = new Alert(Alert.AlertType.ERROR, "ID must be a greater than 0!", ButtonType.OK);
+                alert.showAndWait();
+                return false;
+            }
+        }
+        catch (NumberFormatException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "ID must be a Integer!", ButtonType.OK);
+            alert.showAndWait();
+            return false;
+        }
+
+        return true;
+    }
     private boolean successfulDeposit(int check){
         if (check > 0){
             // display success notification
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Amount Deposited Into Account!", ButtonType.OK);
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Deposit Successful!", ButtonType.OK);
+            alert.showAndWait();
+            loanAmountTextField.clear();
+            return true;
+        }
+        return false;
+    }
+    private boolean successfulWithdraw(int check){
+        if (check > 0){
+            // display success notification
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Withdraw Successful!", ButtonType.OK);
+            alert.showAndWait();
+            loanAmountTextField.clear();
+            return true;
+        }
+        return false;
+    }
+    private boolean successfulTransfer(int check){
+        if (check > 0){
+            // display success notification
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Transfer Successful!", ButtonType.OK);
             alert.showAndWait();
             loanAmountTextField.clear();
             return true;
