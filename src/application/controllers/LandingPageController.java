@@ -630,10 +630,8 @@ public class LandingPageController {
     public void moneyExchangeButtonClicked(ActionEvent actionEvent) {
         searchBox.setVisible(false);
         displaySelectedView(moneyExchangePane);
-        depositAccountTypeComboBox.getItems().addAll(allAccounts);
-        withdrawAccountTypeComboBox.getItems().addAll(allAccounts);
-        moneyExchangeTextAreaDeposit.setText(String.format("No Account Selected"));
-        moneyExchangeTextAreaWithdraw.setText(String.format("No Account Selected"));
+        refreshDepositCB();
+        refreshWithdrawCB();
     }
 
     //// withdraw
