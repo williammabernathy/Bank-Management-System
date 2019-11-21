@@ -658,7 +658,7 @@ public class LandingPageController {
     }
 
     public void submitDepositButtonClicked(ActionEvent actionEvent) {
-        Deposit newDeposit = new Deposit()
+
 
     }
 
