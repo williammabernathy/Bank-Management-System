@@ -2,19 +2,16 @@ package application.controllers;
 
 import application.custClasses.Account;
 import application.custClasses.Customer;
-import application.custClasses.Deposit;
+import application.custClasses.DepositWithdraw;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-import javax.swing.*;
-import java.io.IOException;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -83,6 +80,7 @@ public class LandingPageController {
     //Withdraw Money Pane children
     @FXML private TextField withdrawAmountTextField;
     @FXML private ComboBox withdrawAccountTypeComboBox;
+    @FXML private TextArea moneyExchangeTextAreaWithdraw;
     @FXML private Button submitWithdrawButton;
 
     //Deposit Money Pane children
@@ -633,13 +631,37 @@ public class LandingPageController {
         searchBox.setVisible(false);
         displaySelectedView(moneyExchangePane);
         depositAccountTypeComboBox.getItems().addAll(allAccounts);
+        withdrawAccountTypeComboBox.getItems().addAll(allAccounts);
         moneyExchangeTextAreaDeposit.setText(String.format("No Account Selected"));
+        moneyExchangeTextAreaWithdraw.setText(String.format("No Account Selected"));
     }
 
     //// withdraw
 
+    public void updateWithdrawTextArea(Account selectedAccount, Customer selectedCustomer){
+        moneyExchangeTextAreaWithdraw.setText(String.format("Customer %s has a total\n" + "of $%.2f in his %s account",selectedCustomer.getFname(), selectedAccount.getAccAmount(), selectedAccount.getAccType()));
+    }
+    public void withdrawComboBoxChange(){
+        if(withdrawAccountTypeComboBox.getValue() != null) {
+            updateWithdrawTextArea((Account) withdrawAccountTypeComboBox.getValue(), selectedCust);
+        }
+    }
+    private void refreshWithdrawCB() {
+        withdrawAccountTypeComboBox.getItems().clear();
+        withdrawAccountTypeComboBox.getItems().addAll(allAccounts);
+        moneyExchangeTextAreaWithdraw.setText("No Account Selected");
+    }
     public void submitWithdrawButtonClicked(ActionEvent actionEvent) {
-
+        if(validateAmount(withdrawAmountTextField.getText()) && withdrawAccountTypeComboBox.getValue() != null){
+            LocalDate creationDate = java.time.LocalDate.now();
+            Account selectedAccount = (Account) withdrawAccountTypeComboBox.getValue();
+            int check = DepositWithdraw.createNewDWEntry(selectedAccount.getAccID(), creationDate, withdrawAmountTextField.getText(), 'w');
+            if(successfulDeposit(check)){
+                refreshAccountListView();
+                refreshWithdrawCB();
+                refreshDepositCB();
+            }
+        }
     }
 
     ////deposit
@@ -662,10 +684,11 @@ public class LandingPageController {
         if(validateAmount(depositAmountTextField.getText()) && depositAccountTypeComboBox.getValue() != null){
             LocalDate creationDate = java.time.LocalDate.now();
             Account selectedAccount = (Account) depositAccountTypeComboBox.getValue();
-            int check = Deposit.createNewDeposit(selectedAccount.getAccID(), creationDate, depositAmountTextField.getText());
+            int check = DepositWithdraw.createNewDWEntry(selectedAccount.getAccID(), creationDate, depositAmountTextField.getText(), 'd');
             if(successfulDeposit(check)){
                 refreshAccountListView();
                 refreshDepositCB();
+                refreshWithdrawCB();
             }
         }
     }

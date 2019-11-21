@@ -321,7 +321,7 @@
                                                 <Insets top="5.0" />
                                              </VBox.margin>
                                           </Label>
-                                          <ComboBox fx:id="withdrawAccountTypeComboBox" prefHeight="39.0" prefWidth="369.0" />
+                                          <ComboBox fx:id="withdrawAccountTypeComboBox" onAction="#withdrawComboBoxChange" prefHeight="39.0" prefWidth="369.0" />
                                        </children>
                                     </VBox>
                                  </items>
