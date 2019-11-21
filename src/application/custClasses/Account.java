@@ -37,7 +37,7 @@ public class Account
     }
 
     // getters
-    String getAccID()
+    public String getAccID()
     {
         return this.accID;
     }

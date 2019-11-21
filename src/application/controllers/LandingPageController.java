@@ -587,7 +587,6 @@ public class LandingPageController {
     public void popCustName(){
         loanAccountHolderTextField.setText(selectedCust.getLname() + ", " + selectedCust.getFname());
     }
-    //TODO***************************
     public void newLoanSumbit(ActionEvent actionEvent){
         String custID = loanCustomerIDTextField.getText();
         String loanAmount = loanAmountTextField.getText();
@@ -622,22 +621,6 @@ public class LandingPageController {
         }
         return true;
     }
-    private boolean validateAmount(String amount) {
-        try {
-             Double.parseDouble(amount);
-        }
-        catch (NumberFormatException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Amount must be a number!", ButtonType.OK);
-            alert.showAndWait();
-            return false;
-        }
-        if (Double.parseDouble(amount) < 0){
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Amount must be a greater than 0!", ButtonType.OK);
-            alert.showAndWait();
-            return false;
-        }
-        return true;
-    }
     public void loanCancel(ActionEvent actionEvent){
         loanAmountTextField.clear();
     }
@@ -651,6 +634,7 @@ public class LandingPageController {
     public void moneyExchangeButtonClicked(ActionEvent actionEvent) {
         searchBox.setVisible(false);
         displaySelectedView(moneyExchangePane);
+        depositAccountTypeComboBox.getItems().addAll(allAccounts);
     }
 
     public void submitWithdrawButtonClicked(ActionEvent actionEvent) {
@@ -658,8 +642,11 @@ public class LandingPageController {
     }
 
     public void submitDepositButtonClicked(ActionEvent actionEvent) {
-
-
+        if(validateAmount(depositAmountTextField.getText())){
+            LocalDate creationDate = java.time.LocalDate.now();
+            Account selectedAccount = (Account) depositAccountTypeComboBox.getValue();
+            Deposit.createNewDeposit(selectedAccount.getAccID(), creationDate, depositAmountTextField.getText());
+        }
     }
 
     public void submitTransferButtonClicked(ActionEvent actionEvent) {
@@ -684,5 +671,21 @@ public class LandingPageController {
                 p.setVisible(true);
             }
         }
+    }
+    private boolean validateAmount(String amount) {
+        try {
+            Double.parseDouble(amount);
+        }
+        catch (NumberFormatException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Amount must be a number!", ButtonType.OK);
+            alert.showAndWait();
+            return false;
+        }
+        if (Double.parseDouble(amount) < 0){
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Amount must be a greater than 0!", ButtonType.OK);
+            alert.showAndWait();
+            return false;
+        }
+        return true;
     }
 }
