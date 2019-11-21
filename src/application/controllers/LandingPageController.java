@@ -2,17 +2,16 @@ package application.controllers;
 
 import application.custClasses.Account;
 import application.custClasses.Customer;
+import application.custClasses.DepositWithdraw;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -81,11 +80,13 @@ public class LandingPageController {
     //Withdraw Money Pane children
     @FXML private TextField withdrawAmountTextField;
     @FXML private ComboBox withdrawAccountTypeComboBox;
+    @FXML private TextArea moneyExchangeTextAreaWithdraw;
     @FXML private Button submitWithdrawButton;
 
     //Deposit Money Pane children
     @FXML private TextField depositAmountTextField;
     @FXML private ComboBox depositAccountTypeComboBox;
+    @FXML private TextArea moneyExchangeTextAreaDeposit;
     @FXML private Button submitDepositButton;
 
     //Transfer Money Pane children
@@ -97,7 +98,9 @@ public class LandingPageController {
     //Loan Services Pane and children
     @FXML private Pane loanServicesPane;
     @FXML private ListView loanCustomerAccountListView;
-    @FXML private TextField loanSearchCustomerTextField;
+    @FXML private TextField loanCustomerIDTextField;
+    @FXML private TextField loanAccountHolderTextField;
+    @FXML private TextField loanAmountTextField;
     @FXML private Button loanSearchCustomerButton;
     @FXML private Button loanSubmitButton;
     @FXML private Button loanCancelButton;
@@ -569,12 +572,55 @@ public class LandingPageController {
     /*
     *
     * Loan Services Pane
-    *
+    * Zach
     */
     public void loanServicesButtonClicked(ActionEvent mouseEvent) {
         searchBox.setVisible(false);
         displaySelectedView(loanServicesPane);
+        popCustIDfield();
+        popCustName();
     }
+    public void popCustIDfield(){
+        loanCustomerIDTextField.setText(selectedCust.getCustID());
+    }
+    public void popCustName(){
+        loanAccountHolderTextField.setText(selectedCust.getLname() + ", " + selectedCust.getFname());
+    }
+    public void newLoanSumbit(ActionEvent actionEvent){
+        String custID = loanCustomerIDTextField.getText();
+        String loanAmount = loanAmountTextField.getText();
+        if(validateCustID(custID) && validateAmount(loanAmount)){
+            enterLoanToDB(custID, loanAmount);
+        }
+    }
+
+    private void enterLoanToDB(String customerID, String amount) {
+        //get current date
+        LocalDate creationDate = java.time.LocalDate.now();
+        amount = "-" + amount;
+
+        //query database with entered information
+        int check = Account.createNewAccount(customerID, "L", creationDate, amount);
+        if(successfulNewAccount(check)){
+            refreshAccountListView();
+        }
+    }
+
+    private boolean validateCustID(String custID) {
+        try {
+            Double.parseDouble(custID);
+        }
+        catch (NumberFormatException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "ID must be a number!", ButtonType.OK);
+            alert.showAndWait();
+            return false;
+        }
+        return true;
+    }
+    public void loanCancel(ActionEvent actionEvent){
+        loanAmountTextField.clear();
+    }
+
 
     /*
      *
@@ -584,15 +630,68 @@ public class LandingPageController {
     public void moneyExchangeButtonClicked(ActionEvent actionEvent) {
         searchBox.setVisible(false);
         displaySelectedView(moneyExchangePane);
+        refreshDepositCB();
+        refreshWithdrawCB();
     }
 
-    public void submitWithdrawButtonClicked(ActionEvent actionEvent) {
+    //// withdraw
 
+    public void updateWithdrawTextArea(Account selectedAccount, Customer selectedCustomer){
+        moneyExchangeTextAreaWithdraw.setText(String.format("Customer %s has a total\n" + "of $%.2f in his %s account",selectedCustomer.getFname(), selectedAccount.getAccAmount(), selectedAccount.getAccType()));
+    }
+    public void withdrawComboBoxChange(){
+        if(withdrawAccountTypeComboBox.getValue() != null) {
+            updateWithdrawTextArea((Account) withdrawAccountTypeComboBox.getValue(), selectedCust);
+        }
+    }
+    private void refreshWithdrawCB() {
+        withdrawAccountTypeComboBox.getItems().clear();
+        withdrawAccountTypeComboBox.getItems().addAll(allAccounts);
+        moneyExchangeTextAreaWithdraw.setText("No Account Selected");
+    }
+    public void submitWithdrawButtonClicked(ActionEvent actionEvent) {
+        if(validateAmount(withdrawAmountTextField.getText()) && withdrawAccountTypeComboBox.getValue() != null){
+            LocalDate creationDate = java.time.LocalDate.now();
+            Account selectedAccount = (Account) withdrawAccountTypeComboBox.getValue();
+            int check = DepositWithdraw.createNewDWEntry(selectedAccount.getAccID(), creationDate, withdrawAmountTextField.getText(), 'w');
+            if(successfulDeposit(check)){
+                refreshAccountListView();
+                refreshWithdrawCB();
+                refreshDepositCB();
+            }
+        }
+    }
+
+    ////deposit
+
+    public void updateDepositTextArea(Account selectedAccount, Customer selectedCustomer){
+        moneyExchangeTextAreaDeposit.setText(String.format("Customer %s has a total\n" + "of $%.2f in his %s account",selectedCustomer.getFname(), selectedAccount.getAccAmount(), selectedAccount.getAccType()));
+    }
+    public void depositComboBoxChange(){
+        if(depositAccountTypeComboBox.getValue() != null) {
+            updateDepositTextArea((Account) depositAccountTypeComboBox.getValue(), selectedCust);
+        }
+    }
+    private void refreshDepositCB() {
+        depositAccountTypeComboBox.getItems().clear();
+        depositAccountTypeComboBox.getItems().addAll(allAccounts);
+        moneyExchangeTextAreaDeposit.setText("No Account Selected");
     }
 
     public void submitDepositButtonClicked(ActionEvent actionEvent) {
-
+        if(validateAmount(depositAmountTextField.getText()) && depositAccountTypeComboBox.getValue() != null){
+            LocalDate creationDate = java.time.LocalDate.now();
+            Account selectedAccount = (Account) depositAccountTypeComboBox.getValue();
+            int check = DepositWithdraw.createNewDWEntry(selectedAccount.getAccID(), creationDate, depositAmountTextField.getText(), 'd');
+            if(successfulDeposit(check)){
+                refreshAccountListView();
+                refreshDepositCB();
+                refreshWithdrawCB();
+            }
+        }
     }
+
+    ////transfer
 
     public void submitTransferButtonClicked(ActionEvent actionEvent) {
 
@@ -616,5 +715,41 @@ public class LandingPageController {
                 p.setVisible(true);
             }
         }
+    }
+    private boolean validateAmount(String amount) {
+        try {
+            Double.parseDouble(amount);
+        }
+        catch (NumberFormatException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Amount must be a number!", ButtonType.OK);
+            alert.showAndWait();
+            return false;
+        }
+        if (Double.parseDouble(amount) < 0){
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Amount must be a greater than 0!", ButtonType.OK);
+            alert.showAndWait();
+            return false;
+        }
+        return true;
+    }
+    private boolean successfulDeposit(int check){
+        if (check > 0){
+            // display success notification
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Amount Deposited Into Account!", ButtonType.OK);
+            alert.showAndWait();
+            loanAmountTextField.clear();
+            return true;
+        }
+        return false;
+    }
+    private boolean successfulNewAccount(int check){
+        if (check > 0){
+            // display success notification
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "New Account created!", ButtonType.OK);
+            alert.showAndWait();
+            loanAmountTextField.clear();
+            return true;
+        }
+        return false;
     }
 }
