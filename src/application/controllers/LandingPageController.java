@@ -88,6 +88,7 @@ public class LandingPageController {
     //Deposit Money Pane children
     @FXML private TextField depositAmountTextField;
     @FXML private ComboBox depositAccountTypeComboBox;
+    @FXML private TextArea moneyExchangeTextAreaDeposit;
     @FXML private Button submitDepositButton;
 
     //Transfer Money Pane children
@@ -602,11 +603,8 @@ public class LandingPageController {
 
         //query database with entered information
         int check = Account.createNewAccount(customerID, "L", creationDate, amount);
-        if (check > 0){
-            // display success notification
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "New Account created!", ButtonType.OK);
-            alert.showAndWait();
-            loanAmountTextField.clear();
+        if(successfulNewAccount(check)){
+            refreshAccountListView();
         }
     }
 
@@ -635,17 +633,36 @@ public class LandingPageController {
         searchBox.setVisible(false);
         displaySelectedView(moneyExchangePane);
         depositAccountTypeComboBox.getItems().addAll(allAccounts);
+        moneyExchangeTextAreaDeposit.setText(String.format("No Account Selected"));
     }
 
     public void submitWithdrawButtonClicked(ActionEvent actionEvent) {
 
     }
 
+    public void updateDepositTextArea(Account selectedAccount, Customer selectedCustomer){
+        moneyExchangeTextAreaDeposit.setText(String.format("Customer %s has a total\n" + "of $%f in his %s account",selectedCustomer.getFname(), selectedAccount.getAccAmount(), selectedAccount.getAccType()));
+    }
+    public void depositComboBoxChange(){
+        if(depositAccountTypeComboBox.getValue() != null) {
+            updateDepositTextArea((Account) depositAccountTypeComboBox.getValue(), selectedCust);
+        }
+    }
+    private void refreshDepositCB() {
+        depositAccountTypeComboBox.getItems().clear();
+        depositAccountTypeComboBox.getItems().addAll(allAccounts);
+        moneyExchangeTextAreaDeposit.setText("No Account Selected");
+    }
+
     public void submitDepositButtonClicked(ActionEvent actionEvent) {
         if(validateAmount(depositAmountTextField.getText())){
             LocalDate creationDate = java.time.LocalDate.now();
             Account selectedAccount = (Account) depositAccountTypeComboBox.getValue();
-            Deposit.createNewDeposit(selectedAccount.getAccID(), creationDate, depositAmountTextField.getText());
+            int check = Deposit.createNewDeposit(selectedAccount.getAccID(), creationDate, depositAmountTextField.getText());
+            if(successfulDeposit(check)){
+                refreshAccountListView();
+                refreshDepositCB();
+            }
         }
     }
 
@@ -687,5 +704,25 @@ public class LandingPageController {
             return false;
         }
         return true;
+    }
+    private boolean successfulDeposit(int check){
+        if (check > 0){
+            // display success notification
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Amount Deposited Into Account!", ButtonType.OK);
+            alert.showAndWait();
+            loanAmountTextField.clear();
+            return true;
+        }
+        return false;
+    }
+    private boolean successfulNewAccount(int check){
+        if (check > 0){
+            // display success notification
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "New Account created!", ButtonType.OK);
+            alert.showAndWait();
+            loanAmountTextField.clear();
+            return true;
+        }
+        return false;
     }
 }

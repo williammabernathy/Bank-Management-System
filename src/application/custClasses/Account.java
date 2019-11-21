@@ -47,7 +47,7 @@ public class Account
         return this.custID;
     }
 
-    String getAccType()
+    public String getAccType()
     {
         return this.accType;
     }
@@ -57,7 +57,7 @@ public class Account
         return this.creationDate;
     }
 
-    double getAccAmount()
+    public double getAccAmount()
     {
         return this.accAmount;
     }
