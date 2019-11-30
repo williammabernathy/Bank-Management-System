@@ -24,7 +24,8 @@ public class LoginController
     @FXML private TextField useranameTextField;
     private static String loggedUser;
 
-    public void handleLoginButtonAction(MouseEvent mouseEvent) throws IOException {
+    public void handleLoginButtonAction(MouseEvent mouseEvent) throws IOException
+    {
         // Authenticate user here
         // and display landing page if true
         String validateUser, validatePass;
@@ -38,36 +39,34 @@ public class LoginController
         verification = Employee.validateLogin(validateUser, validatePass);
 
         //check if password matched
-        if(verification == 1)
-    {
-        System.out.println(loggedUser);
-        try
+        if (verification == 1)
         {
-            FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("../../resources/view/landingPage.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 1251, 787);
-            Stage stage = new Stage();
-            stage.setResizable(false);
-            stage.setTitle("Bank Management System");
-            stage.setScene(scene);
+            try
+            {
+                FXMLLoader fxmlLoader = new FXMLLoader();
+                fxmlLoader.setLocation(getClass().getResource("../../resources/view/landingPage.fxml"));
+                Scene scene = new Scene(fxmlLoader.load(), 1251, 787);
+                Stage stage = new Stage();
+                stage.setResizable(false);
+                stage.setTitle("Bank Management System");
+                stage.setScene(scene);
+                useranameTextField.clear();
+                passwordTextField.clear();
+                stage.show();
+            }
+            catch (IOException e)
+            {
+                Logger logger = Logger.getLogger(getClass().getName());
+                logger.log(Level.SEVERE, "Failed to create loading window", e);
+            }
+        }
+        else {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Invalid Username or Password", ButtonType.OK);
+            alert.showAndWait();
             useranameTextField.clear();
             passwordTextField.clear();
-            stage.show();
-        }
-        catch (IOException e)
-        {
-            Logger logger = Logger.getLogger(getClass().getName());
-            logger.log(Level.SEVERE, "Failed to create loading window", e);
         }
     }
-        else
-    {
-        Alert alert = new Alert(Alert.AlertType.ERROR, "Invalid Username or Password", ButtonType.OK);
-        alert.showAndWait();
-        useranameTextField.clear();
-        passwordTextField.clear();
-    }
-}
 
     public static void setUsername(String user)
     {
